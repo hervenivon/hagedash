@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { Button } from 'reactstrap';
+
 import {
   connectAction,
   disconnectAction,
@@ -57,29 +59,34 @@ class App extends Component {
     const filteredData = allData;
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Buzzard realtime dashboard</h1>
-        </header>
-        <pre>
-          {
-            JSON.stringify(this.props)
-          }
-        </pre>
+      <div className="container-fluid">
+        <div className="row align-items-center App-header">
+          <div className="col-2">
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
+          <div className="col-10">
+            <h1 className="App-title">Buzzard realtime dashboard</h1>
+          </div>
+        </div>
+        <div>
+          <pre>
+            {
+              JSON.stringify(this.props)
+            }
+          </pre>
 
-        <pre>
-          { JSON.stringify(this.state) }
-        </pre>
-
+          <pre>
+            { JSON.stringify(this.state) }
+          </pre>
+        </div>
         <Stats allData={allData} filteredData={filteredData} />
         <br/>
         <div>
-          <button onClick={this.props.connectAction}>Connect</button>
-          <button onClick={this.props.disconnectAction}>Disconnect</button>
-          <button onClick={this.props.clearHistoryAction}>Clear history</button>
-          <button onClick={this.props.pauseClearingHistory}>Pause history cleaning</button>
-          <button onClick={this.props.resumeClearingHistory}>Resume history cleaning</button>
+          <Button onClick={this.props.connectAction} color="primary">Connect</Button>{' '}
+          <Button onClick={this.props.disconnectAction} color="secondary">Disconnect</Button>{' '}
+          <Button onClick={this.props.pauseClearingHistory} color="secondary">Pause history cleaning</Button>{' '}
+          <Button onClick={this.props.resumeClearingHistory} color="secondary">Resume history cleaning</Button>{' '}
+          <Button onClick={this.props.clearHistoryAction} color="warning">Clear history</Button>
         </div>
       </div>
     );
