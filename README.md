@@ -65,7 +65,8 @@ $> ./hagedash_mock.py
 9. [X] Make the distribution trough `./hagedash.py`
 10. [ ] Dispatch the "Connect" action automatically on page load
 11. [X] Stop automatic re-connection on manual disconnect
-12. [ ] Add bootstrap to make things nicer
+12. [ ] Change logo and header
+13. [ ] Add bootstrap to make things nicer
 
 ### External resources
 
@@ -93,7 +94,12 @@ react, redux, websockets:
 - https://medium.com/@ianovenden/redux-websocket-integration-c1a0d22d3189
 - https://www.ibm.com/developerworks/library/wa-manage-state-with-redux-p1-david-geary/
 - https://medium.com/backticks-tildes/setting-up-a-redux-project-with-create-react-app-e363ab2329b8
+
+- https://github.com/giantmachines/redux-websocket/pull/8/files
+- https://gist.github.com/dmichael/9dc767fca93624df58b423d01e485402
+
 - https://medium.com/@notrab/getting-started-with-create-react-app-redux-react-router-redux-thunk-d6a19259f71f
+- https://medium.com/@andrewdrummond_52198/04-what-the-thunk-is-react-redux-pt-2-3994c57c09c1
 
 - Serving a create-react-app with Flask: https://stackoverflow.com/questions/44209978/serving-a-create-react-app-with-flask
 - (interesting, not that much): https://peteris.rocks/blog/real-time-stats-with-websockets-and-react/

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { connectAction,
-         disconnectAction,
-         clearHistoryAction,
-         pauseClearingHistory,
-         resumeClearingHistory } from './actions/websocketActions'
+import {
+  connectAction,
+  disconnectAction,
+  clearHistoryAction,
+  pauseClearingHistory,
+  resumeClearingHistory
+} from '../actions/websocketActions'
 
-import logo from './logo.svg';
 import './App.css';
+import logo from '../logo.svg';
 
 const mapStateToProps = state => ({
   ...state
