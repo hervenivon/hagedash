@@ -23,17 +23,19 @@ $> ./hagedash.py
 
 ### Pre requisite
 
-You must have `npm` installed to develop and build the hagedash dashboard.
+You must have `npm` installed to develop and build the `hagedash` dashboard.
 
 ### Starting the dashboard for development purpose
 
-The `hagedash` dasboard is a react application located in the `client` folder of this repository.
+The `hagedash` dashboard is a react application located in the `client` folder of this repository.
 
 To start the live reload feature simply:
 ```
 $> cd client
 $> npm start
 ```
+
+See [`client/README.md`](client/README.md) for more information.
 
 ## Build
 
@@ -42,6 +44,7 @@ $> cd client
 $> npm build
 ```
 
+See [`client/README.md`](client/README.md) for more information.
 
 ### Launch the Mock websocket server
 
@@ -51,11 +54,9 @@ Launch the websocket server. It will create a websocket server on `http://localh
 $> ./hagedash_mock.py
 ```
 
-
-
 ### Development todo
-1. [ ] Set the development pipeline (https://reactjs.org/docs/create-a-new-react-app.html)
-2. [ ] Build the datamanager (file://../hagedash#1/src/)
+1. [X] Set the development pipeline (https://reactjs.org/docs/create-a-new-react-app.html)
+2. [X] Build the datamanager (file://../hagedash#1/src/)
 3. [ ] Build the bar charts
 4. [ ] Build the donut chart
 5. [ ] Build the timeline chart
@@ -67,6 +68,8 @@ $> ./hagedash_mock.py
 11. [X] Stop automatic re-connection on manual disconnect
 12. [ ] Change logo and header
 13. [ ] Add bootstrap to make things nicer
+14. [ ] Data validation in the websocket handler
+15. [ ] Optimized computed properties (in order to avoid their computation within all components)
 
 ### External resources
 
@@ -101,6 +104,10 @@ react, redux, websockets:
 - https://medium.com/@notrab/getting-started-with-create-react-app-redux-react-router-redux-thunk-d6a19259f71f
 - https://medium.com/@andrewdrummond_52198/04-what-the-thunk-is-react-redux-pt-2-3994c57c09c1
 
+- https://www.fullstackreact.com/30-days-of-react/day-19/
+- https://github.com/markerikson/redux-ecosystem-links/blob/master/middleware-sockets-adapters.md
+- https://github.com/reduxjs/redux-thunk
+- https://blog.logrocket.com/beyond-rest-using-websockets-for-two-way-communication-in-your-react-app-884eff6655f5
 - Serving a create-react-app with Flask: https://stackoverflow.com/questions/44209978/serving-a-create-react-app-with-flask
 - (interesting, not that much): https://peteris.rocks/blog/real-time-stats-with-websockets-and-react/
 
@@ -112,7 +119,11 @@ d3.js, dc.js, crossfilters:
 - Earthquake, interactive dashboard and brush filter (and brush style): http://bl.ocks.org/d3noob/6077996
 
 Realtime dashboard with websockets:
+- https://react.rocks/tag/Realtime
+- https://react.rocks/tag/WebSockets
+- https://react.rocks/example/iTunes-Remote
 - https://www.youtube.com/watch?v=Lc2TA0-gZqg
+- https://peteris.rocks/blog/real-time-stats-with-websockets-and-react/
 
 dataviz:
 - [Hybrid Sankey diagrams: Visual analysis of multidimensional data for understanding resource use](https://www.sciencedirect.com/science/article/pii/S0921344917301167?via%3Dihub)

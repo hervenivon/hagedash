@@ -32,14 +32,14 @@ export default (state = initialState, action = {}) => {
     case WEBSOCKET_MESSAGE:
       const tmpEntry = JSON.parse(action.payload.data);
       const newEntry = {
-        time: new Date(tmpEntry.time * 1000), // We are receiving Unix Timestamp
+        date: new Date(tmpEntry.time * 1000), // We are receiving Unix Timestamp
         pools: tmpEntry.pools,
         rasters: tmpEntry.rasters,
         queries: tmpEntry.queries,
       };
       state.data.push(newEntry);
       // delete rows collected more than _history hour(s) ago
-      state.data = state.data.filter(e => e.time >= (new Date().getTime() - state.history * 60 * 1000));
+      state.data = state.data.filter(e => e.date >= (new Date().getTime() - state.history * 60 * 1000));
       // update the number of records
       state.records = state.data.length;
       return Object.assign({}, state);
