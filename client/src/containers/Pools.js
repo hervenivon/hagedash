@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import colorbrewer from 'colorbrewer'
+import { format } from 'd3-format'
 import { legendColor } from 'd3-svg-legend'
 import { mean } from 'd3-array'
 import { nest, set } from 'd3-collection'
@@ -27,36 +28,44 @@ class Pools extends Component {
     const stroke = 1;
     const width = Math.min(this.props.size[0] / 4);
     const height = Math.min(this.props.size[0] / 4, 150);
-    const outerRadius = height / 2 - stroke * 2;
+    const radius = height / 2
+    const outerRadius = radius - stroke;
     const innerRadius = outerRadius / 3.5;
     const translationX = width / 2 + stroke;
     const translationY = outerRadius + stroke;
 
-    const pieChart = pie();
-    const newArc = arc();
+    const valueFormat = format(".1f");
 
-    newArc
-      .innerRadius(innerRadius)
-      .outerRadius(outerRadius);
+    const pieChart = pie().padAngle(0.005).sort(null).value(valueFunc);
+    const arcs = pieChart(nestedData);
+    const arcGenerator = arc().innerRadius(innerRadius).outerRadius(outerRadius);
 
-    pieChart.value(valueFunc);
+    const g = select(node).select("g")
+      .attr("transform", `translate(${translationX},${translationY})`);
 
-    const valuedPie = pieChart(nestedData);
-
-    let paths = select(node)
-      .selectAll("path")
-      .data(valuedPie);
-
-    paths.enter()
-      .append("path")
-      .attr("transform", `translate(${translationX},${translationY})`)
-      .attr("d", newArc)
+    g.selectAll("path")
+      .data(arcs)
+      .enter().append("path")
+      .attr("d", arcGenerator)
       .style("fill", (d, i) => colorScale(i))
       .style("stroke", "lightgrey")
-      .style("stroke-width", `${stroke}px`);
+      .style("stroke-width", `${stroke}px`)
+      .append("title")
+      .text(d => `${d.data.key}`)
+      .exit().remove();
 
-    paths.exit()
-      .remove();
+    const text = g.selectAll("text")
+      .data(arcs)
+
+      .enter()
+        .append("text")
+        .attr("transform", d => `translate(${arcGenerator.centroid(d)})`)
+        .append("tspan")
+        .attr("x", "-0.3em")
+        .attr("y", "-0.1em")
+        .style("font-weight", "regular")
+        .text(d => `${valueFormat(valueFunc(d.data))}`)
+      .exit().remove();
   }
 
   _legend(node, labels, colorScale) {
@@ -77,8 +86,7 @@ class Pools extends Component {
   }
 
   clearCharts() {
-    // from https://github.com/wonism/react-d3-pie-chart/blob/master/src/react-d3-pie-chart.jsx
-    // This is awful, the select.exit().remove() should work
+    // CanThis is awful, the select.exit().remove() should work
 
     select(this.legendRef)
       .selectAll('*')
@@ -89,18 +97,22 @@ class Pools extends Component {
       .remove();
 
     select(this.avgWorkerCountPerPoolRef)
+      .select('g')
       .selectAll('*')
       .remove();
 
     select(this.avgWorkingCountPerPoolRef)
+      .select('g')
       .selectAll('*')
       .remove();
 
     select(this.avgWorkerCountPerPoolTypeRef)
+      .select('g')
       .selectAll('*')
       .remove();
 
     select(this.avgWorkingCountPerPoolTypeRef)
+      .select('g')
       .selectAll('*')
       .remove();
   }
@@ -165,16 +177,16 @@ class Pools extends Component {
     return <div className="poolsContainer">
       <div className="row align-items-center">
         <div className="col-3">
-          <svg ref={node => this.avgWorkerCountPerPoolRef = node} width={width} height={height}></svg>
+          <svg ref={node => this.avgWorkerCountPerPoolRef = node} width={width} height={height}><g></g></svg>
         </div>
         <div className="col-3">
-          <svg ref={node => this.avgWorkingCountPerPoolRef = node} width={width} height={height}></svg>
+          <svg ref={node => this.avgWorkingCountPerPoolRef = node} width={width} height={height}><g></g></svg>
         </div>
         <div className="col-3">
-          <svg ref={node => this.avgWorkerCountPerPoolTypeRef = node} width={width} height={height}></svg>
+          <svg ref={node => this.avgWorkerCountPerPoolTypeRef = node} width={width} height={height}><g></g></svg>
         </div>
         <div className="col-3">
-          <svg ref={node => this.avgWorkingCountPerPoolTypeRef = node} width={width} height={height}></svg>
+          <svg ref={node => this.avgWorkingCountPerPoolTypeRef = node} width={width} height={height}><g></g></svg>
         </div>
       </div>
       <div className="row align-items-center">
