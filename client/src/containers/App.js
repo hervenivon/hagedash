@@ -15,6 +15,7 @@ import './App.css';
 import logo from '../logo.svg';
 
 import Stats from './Stats';
+import Pools from './Pools';
 
 const mapStateToProps = state => ({
   ...state
@@ -88,6 +89,8 @@ class App extends Component {
           <Button onClick={this.props.resumeClearingHistory} color="secondary">Resume history cleaning</Button>{' '}
           <Button onClick={this.props.clearHistoryAction} color="warning">Clear history</Button>
         </div>
+        <br/>
+        <Pools data={filteredData} size={[this.state.screenWidth, this.state.screenWidth / 4]} />
       </div>
     );
   }

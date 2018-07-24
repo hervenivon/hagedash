@@ -19,6 +19,8 @@ $> python -m SimpleHTTPServer 3000
 $> ./hagedash.py
 ```
 
+Which is mostly equivalent to `python3 -m http.server`
+
 ## Development
 
 ### Pre requisite
@@ -36,6 +38,18 @@ $> npm start
 ```
 
 See [`client/README.md`](client/README.md) for more information.
+
+### Debugging in the Editor
+
+Debugging the dashboard in the Editor has only been tested in [Visual Studio Code](https://code.visualstudio.com/).
+
+This enables you as a developer to write and debug your React code without leaving the editor, and most importantly it enables you to have a continuous development workflow, where context switching is minimal, as you don’t have to switch between tools.
+
+You would need to have the latest version of [VS Code](https://code.visualstudio.com/) and [VS Code Chrome Debugger Extension](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) installed.
+
+Start your app by running npm start, and start debugging in VS Code by pressing `F5` or by clicking the green debug icon of the debugger panel. You can now write code, set breakpoints, make changes to the code, and debug your newly modified code—all from your editor.
+
+See [Debugging in the Editor](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-in-the-editor) for additional details regarding other editors.
 
 ## Build
 
@@ -56,7 +70,7 @@ $> ./hagedash_mock.py
 
 ### Development todo
 1. [X] Set the development pipeline (https://reactjs.org/docs/create-a-new-react-app.html)
-2. [X] Build the datamanager (file://../hagedash#1/src/)
+2. [X] Build the data management through websockets
 3. [ ] Build the bar charts
 4. [ ] Build the donut chart
 5. [ ] Build the timeline chart
@@ -70,6 +84,7 @@ $> ./hagedash_mock.py
 13. [ ] Add bootstrap to make things nicer
 14. [ ] Data validation in the websocket handler
 15. [ ] Optimized computed properties (in order to avoid their computation within all components)
+16. [ ] Add tests 😇
 
 ### External resources
 

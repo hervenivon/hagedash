@@ -1,0 +1,746 @@
+[
+  {
+    "date": "2018-07-24T16:51:31.797Z",
+    "pools": {
+      "io": {
+        "worker_count": 8,
+        "working_count": 3,
+        "type": "thread"
+      },
+      "gpu": {
+        "worker_count": 1,
+        "working_count": 0,
+        "type": "thread"
+      }
+    },
+    "rasters": {
+      "ortho16": {
+        "io_pool_id": "io",
+        "computation_pool_id": "io",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": false,
+        "fp": "Footprint(...)",
+        "fp_virtual": "Footprint(...)",
+        "dtype": "uint8",
+        "nodata": null,
+        "nbands": 3,
+        "proj4_stored": "proj4 stored",
+        "proj4_virtual": "virtual proj4"
+      },
+      "hm": {
+        "io_pool_id": "io",
+        "computation_pool_id": "gpu",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": true,
+        "cache_tiles_state": [
+          2,
+          5,
+          3
+        ]
+      }
+    },
+    "queries": {
+      "0x25648": {
+        "connection": [
+          "ortho16",
+          "hm"
+        ],
+        "total_arrays": 16,
+        "sent_arrays": 15,
+        "max_waiting": 5,
+        "waiting": 1,
+        "total_pixels": 16000,
+        "sent_pixels": 15000,
+        "total_bytes": 16000,
+        "sent_bytes": 15000,
+        "total_area": 16,
+        "sent_area": 15
+      },
+      "0x87431": {
+        "connection": [
+          "dsm16",
+          "hm"
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 1000,
+        "sent_pixels": 0,
+        "total_bytes": 1000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      },
+      "0x8asd31": {
+        "connection": [
+          "hm",
+          null
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 500,
+        "sent_pixels": 0,
+        "total_bytes": 5000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      }
+    }
+  },
+  {
+    "date": "2018-07-24T16:51:32.798Z",
+    "pools": {
+      "io": {
+        "worker_count": 4,
+        "working_count": 9,
+        "type": "thread"
+      },
+      "gpu": {
+        "worker_count": 1,
+        "working_count": 0,
+        "type": "thread"
+      }
+    },
+    "rasters": {
+      "ortho16": {
+        "io_pool_id": "io",
+        "computation_pool_id": "io",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": false,
+        "fp": "Footprint(...)",
+        "fp_virtual": "Footprint(...)",
+        "dtype": "uint8",
+        "nodata": null,
+        "nbands": 3,
+        "proj4_stored": "proj4 stored",
+        "proj4_virtual": "virtual proj4"
+      },
+      "hm": {
+        "io_pool_id": "io",
+        "computation_pool_id": "gpu",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": true,
+        "cache_tiles_state": [
+          2,
+          5,
+          3
+        ]
+      }
+    },
+    "queries": {
+      "0x25648": {
+        "connection": [
+          "ortho16",
+          "hm"
+        ],
+        "total_arrays": 16,
+        "sent_arrays": 15,
+        "max_waiting": 5,
+        "waiting": 1,
+        "total_pixels": 16000,
+        "sent_pixels": 15000,
+        "total_bytes": 16000,
+        "sent_bytes": 15000,
+        "total_area": 16,
+        "sent_area": 15
+      },
+      "0x87431": {
+        "connection": [
+          "dsm16",
+          "hm"
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 1000,
+        "sent_pixels": 0,
+        "total_bytes": 1000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      },
+      "0x8asd31": {
+        "connection": [
+          "hm",
+          null
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 500,
+        "sent_pixels": 0,
+        "total_bytes": 5000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      }
+    }
+  },
+  {
+    "date": "2018-07-24T16:51:33.799Z",
+    "pools": {
+      "io": {
+        "worker_count": 6,
+        "working_count": 7,
+        "type": "thread"
+      },
+      "gpu": {
+        "worker_count": 3,
+        "working_count": 8,
+        "type": "thread"
+      }
+    },
+    "rasters": {
+      "ortho16": {
+        "io_pool_id": "io",
+        "computation_pool_id": "io",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": false,
+        "fp": "Footprint(...)",
+        "fp_virtual": "Footprint(...)",
+        "dtype": "uint8",
+        "nodata": null,
+        "nbands": 3,
+        "proj4_stored": "proj4 stored",
+        "proj4_virtual": "virtual proj4"
+      },
+      "hm": {
+        "io_pool_id": "io",
+        "computation_pool_id": "gpu",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": true,
+        "cache_tiles_state": [
+          2,
+          5,
+          3
+        ]
+      }
+    },
+    "queries": {
+      "0x25648": {
+        "connection": [
+          "ortho16",
+          "hm"
+        ],
+        "total_arrays": 16,
+        "sent_arrays": 15,
+        "max_waiting": 5,
+        "waiting": 1,
+        "total_pixels": 16000,
+        "sent_pixels": 15000,
+        "total_bytes": 16000,
+        "sent_bytes": 15000,
+        "total_area": 16,
+        "sent_area": 15
+      },
+      "0x87431": {
+        "connection": [
+          "dsm16",
+          "hm"
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 1000,
+        "sent_pixels": 0,
+        "total_bytes": 1000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      },
+      "0x8asd31": {
+        "connection": [
+          "hm",
+          null
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 500,
+        "sent_pixels": 0,
+        "total_bytes": 5000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      }
+    }
+  },
+  {
+    "date": "2018-07-24T16:51:34.800Z",
+    "pools": {
+      "io": {
+        "worker_count": 3,
+        "working_count": 5,
+        "type": "thread"
+      },
+      "gpu": {
+        "worker_count": 3,
+        "working_count": 0,
+        "type": "thread"
+      }
+    },
+    "rasters": {
+      "ortho16": {
+        "io_pool_id": "io",
+        "computation_pool_id": "io",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": false,
+        "fp": "Footprint(...)",
+        "fp_virtual": "Footprint(...)",
+        "dtype": "uint8",
+        "nodata": null,
+        "nbands": 3,
+        "proj4_stored": "proj4 stored",
+        "proj4_virtual": "virtual proj4"
+      },
+      "hm": {
+        "io_pool_id": "io",
+        "computation_pool_id": "gpu",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": true,
+        "cache_tiles_state": [
+          2,
+          5,
+          3
+        ]
+      }
+    },
+    "queries": {
+      "0x25648": {
+        "connection": [
+          "ortho16",
+          "hm"
+        ],
+        "total_arrays": 16,
+        "sent_arrays": 15,
+        "max_waiting": 5,
+        "waiting": 1,
+        "total_pixels": 16000,
+        "sent_pixels": 15000,
+        "total_bytes": 16000,
+        "sent_bytes": 15000,
+        "total_area": 16,
+        "sent_area": 15
+      },
+      "0x87431": {
+        "connection": [
+          "dsm16",
+          "hm"
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 1000,
+        "sent_pixels": 0,
+        "total_bytes": 1000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      },
+      "0x8asd31": {
+        "connection": [
+          "hm",
+          null
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 500,
+        "sent_pixels": 0,
+        "total_bytes": 5000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      }
+    }
+  },
+  {
+    "date": "2018-07-24T16:51:35.806Z",
+    "pools": {
+      "io": {
+        "worker_count": 1,
+        "working_count": 9,
+        "type": "thread"
+      },
+      "gpu": {
+        "worker_count": 1,
+        "working_count": 2,
+        "type": "thread"
+      }
+    },
+    "rasters": {
+      "ortho16": {
+        "io_pool_id": "io",
+        "computation_pool_id": "io",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": false,
+        "fp": "Footprint(...)",
+        "fp_virtual": "Footprint(...)",
+        "dtype": "uint8",
+        "nodata": null,
+        "nbands": 3,
+        "proj4_stored": "proj4 stored",
+        "proj4_virtual": "virtual proj4"
+      },
+      "hm": {
+        "io_pool_id": "io",
+        "computation_pool_id": "gpu",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": true,
+        "cache_tiles_state": [
+          2,
+          5,
+          3
+        ]
+      }
+    },
+    "queries": {
+      "0x25648": {
+        "connection": [
+          "ortho16",
+          "hm"
+        ],
+        "total_arrays": 16,
+        "sent_arrays": 15,
+        "max_waiting": 5,
+        "waiting": 1,
+        "total_pixels": 16000,
+        "sent_pixels": 15000,
+        "total_bytes": 16000,
+        "sent_bytes": 15000,
+        "total_area": 16,
+        "sent_area": 15
+      },
+      "0x87431": {
+        "connection": [
+          "dsm16",
+          "hm"
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 1000,
+        "sent_pixels": 0,
+        "total_bytes": 1000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      },
+      "0x8asd31": {
+        "connection": [
+          "hm",
+          null
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 500,
+        "sent_pixels": 0,
+        "total_bytes": 5000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      }
+    }
+  },
+  {
+    "date": "2018-07-24T16:51:36.807Z",
+    "pools": {
+      "io": {
+        "worker_count": 6,
+        "working_count": 8,
+        "type": "thread"
+      },
+      "gpu": {
+        "worker_count": 4,
+        "working_count": 1,
+        "type": "thread"
+      }
+    },
+    "rasters": {
+      "ortho16": {
+        "io_pool_id": "io",
+        "computation_pool_id": "io",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": false,
+        "fp": "Footprint(...)",
+        "fp_virtual": "Footprint(...)",
+        "dtype": "uint8",
+        "nodata": null,
+        "nbands": 3,
+        "proj4_stored": "proj4 stored",
+        "proj4_virtual": "virtual proj4"
+      },
+      "hm": {
+        "io_pool_id": "io",
+        "computation_pool_id": "gpu",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": true,
+        "cache_tiles_state": [
+          2,
+          5,
+          3
+        ]
+      }
+    },
+    "queries": {
+      "0x25648": {
+        "connection": [
+          "ortho16",
+          "hm"
+        ],
+        "total_arrays": 16,
+        "sent_arrays": 15,
+        "max_waiting": 5,
+        "waiting": 1,
+        "total_pixels": 16000,
+        "sent_pixels": 15000,
+        "total_bytes": 16000,
+        "sent_bytes": 15000,
+        "total_area": 16,
+        "sent_area": 15
+      },
+      "0x87431": {
+        "connection": [
+          "dsm16",
+          "hm"
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 1000,
+        "sent_pixels": 0,
+        "total_bytes": 1000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      },
+      "0x8asd31": {
+        "connection": [
+          "hm",
+          null
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 500,
+        "sent_pixels": 0,
+        "total_bytes": 5000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      }
+    }
+  },
+  {
+    "date": "2018-07-24T16:51:37.808Z",
+    "pools": {
+      "io": {
+        "worker_count": 1,
+        "working_count": 9,
+        "type": "thread"
+      },
+      "gpu": {
+        "worker_count": 3,
+        "working_count": 9,
+        "type": "thread"
+      }
+    },
+    "rasters": {
+      "ortho16": {
+        "io_pool_id": "io",
+        "computation_pool_id": "io",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": false,
+        "fp": "Footprint(...)",
+        "fp_virtual": "Footprint(...)",
+        "dtype": "uint8",
+        "nodata": null,
+        "nbands": 3,
+        "proj4_stored": "proj4 stored",
+        "proj4_virtual": "virtual proj4"
+      },
+      "hm": {
+        "io_pool_id": "io",
+        "computation_pool_id": "gpu",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": true,
+        "cache_tiles_state": [
+          2,
+          5,
+          3
+        ]
+      }
+    },
+    "queries": {
+      "0x25648": {
+        "connection": [
+          "ortho16",
+          "hm"
+        ],
+        "total_arrays": 16,
+        "sent_arrays": 15,
+        "max_waiting": 5,
+        "waiting": 1,
+        "total_pixels": 16000,
+        "sent_pixels": 15000,
+        "total_bytes": 16000,
+        "sent_bytes": 15000,
+        "total_area": 16,
+        "sent_area": 15
+      },
+      "0x87431": {
+        "connection": [
+          "dsm16",
+          "hm"
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 1000,
+        "sent_pixels": 0,
+        "total_bytes": 1000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      },
+      "0x8asd31": {
+        "connection": [
+          "hm",
+          null
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 500,
+        "sent_pixels": 0,
+        "total_bytes": 5000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      }
+    }
+  },
+  {
+    "date": "2018-07-24T16:51:38.812Z",
+    "pools": {
+      "io": {
+        "worker_count": 8,
+        "working_count": 6,
+        "type": "thread"
+      },
+      "gpu": {
+        "worker_count": 7,
+        "working_count": 7,
+        "type": "thread"
+      }
+    },
+    "rasters": {
+      "ortho16": {
+        "io_pool_id": "io",
+        "computation_pool_id": "io",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": false,
+        "fp": "Footprint(...)",
+        "fp_virtual": "Footprint(...)",
+        "dtype": "uint8",
+        "nodata": null,
+        "nbands": 3,
+        "proj4_stored": "proj4 stored",
+        "proj4_virtual": "virtual proj4"
+      },
+      "hm": {
+        "io_pool_id": "io",
+        "computation_pool_id": "gpu",
+        "merge_pool_id": "0120",
+        "resampling_pool_id": "0120",
+        "cached": true,
+        "cache_tiles_state": [
+          2,
+          5,
+          3
+        ]
+      }
+    },
+    "queries": {
+      "0x25648": {
+        "connection": [
+          "ortho16",
+          "hm"
+        ],
+        "total_arrays": 16,
+        "sent_arrays": 15,
+        "max_waiting": 5,
+        "waiting": 1,
+        "total_pixels": 16000,
+        "sent_pixels": 15000,
+        "total_bytes": 16000,
+        "sent_bytes": 15000,
+        "total_area": 16,
+        "sent_area": 15
+      },
+      "0x87431": {
+        "connection": [
+          "dsm16",
+          "hm"
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 1000,
+        "sent_pixels": 0,
+        "total_bytes": 1000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      },
+      "0x8asd31": {
+        "connection": [
+          "hm",
+          null
+        ],
+        "total_arrays": 1,
+        "sent_arrays": 0,
+        "max_waiting": 5,
+        "waiting": 0,
+        "total_pixels": 500,
+        "sent_pixels": 0,
+        "total_bytes": 5000,
+        "sent_bytes": 0,
+        "total_area": 1,
+        "sent_area": 0
+      }
+    }
+  }
+]

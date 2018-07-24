@@ -12,8 +12,8 @@ from random import randint
 class WebSocketHandler(websocket.WebSocketHandler):
     def __init__(self, application, request, **kwargs):
         super().__init__(application, request, **kwargs)
-        self._pools_io_worker_count = 1
-        self._pools_gpu_worker_count = 1
+        self._pools_io_working_count = 1
+        self._pools_gpu_working_count = 1
 
     def _getDataPoint(self):
         # create a new data point
@@ -21,13 +21,13 @@ class WebSocketHandler(websocket.WebSocketHandler):
             "time": time.time(),
             "pools": {
                 "io": {
-                    "worker_count": self._pools_io_worker_count,
-                    "working_count": random.randrange(0, 2),
+                    "worker_count": random.randrange(1, 10),
+                    "working_count": self._pools_io_working_count,
                     "type": "thread"
                 },
                 "gpu": {
-                    "worker_count": self._pools_gpu_worker_count,
-                    "working_count": random.randrange(0, 2),
+                    "worker_count": random.randrange(1, 10),
+                    "working_count": self._pools_gpu_working_count,
                     "type": "thread"
                 }
             },
@@ -125,8 +125,8 @@ class WebSocketHandler(websocket.WebSocketHandler):
             }
         }
 
-        self._pools_io_worker_count += 1 if random.randrange(0, 10) == 0 else 0
-        self._pools_gpu_worker_count += 1 if random.randrange(0, 10) == 0 else 0
+        self._pools_io_working_count = random.randrange(0, 10)
+        self._pools_gpu_working_count = random.randrange(0, 10)
 
         return point_data
 
