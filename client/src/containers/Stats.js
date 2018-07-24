@@ -20,7 +20,6 @@ export default (props) => {
   }, []));
 
   return <div>
-    <h1>Stats</h1>
     <span>{filteredLength}/{allLength} records selected for a periode of {durationMin} minute(s). </span>
     <span>{allUniqQueries.length} uniq queries.</span>
   </div>
