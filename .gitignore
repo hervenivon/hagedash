@@ -70,7 +70,6 @@ venv.bak/
 .env.development.local
 .env.test.local
 .env.production.local
-.vscode
 
 # Node specific
 node_modules/
