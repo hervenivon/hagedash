@@ -20,7 +20,6 @@ class Pools extends Component {
   }
 
   componentDidUpdate() {
-    this.clearCharts();
     this.createPoolCharts();
   }
 
@@ -43,29 +42,39 @@ class Pools extends Component {
     const g = select(node).select("g")
       .attr("transform", `translate(${translationX},${translationY})`);
 
-    g.selectAll("path")
-      .data(arcs)
-      .enter().append("path")
-      .attr("d", arcGenerator)
-      .style("fill", (d, i) => colorScale(i))
+    const paths = g.selectAll("path")
+      .data(arcs);
+
+    // What to do when nbr of data elements is different than nbr of DOM elements
+    paths.exit().remove();
+
+    // What to do when nbr of data elements is superior than nbr of DOM elements
+    paths.enter().insert("path")
       .style("stroke", "lightgrey")
       .style("stroke-width", `${stroke}px`)
-      .append("title")
-      .text(d => `${d.data.key}`)
-      .exit().remove();
+      .append("title");
 
-    const text = g.selectAll("text")
-      .data(arcs)
+    // What to do when nbr of data elements equals nbr of DOM elements
+    paths.attr("d", arcGenerator)
+      .style("fill", (d, i) => colorScale(i))
+      .select("title")
+      .text(d => `${d.data.key}`);
 
-      .enter()
-        .append("text")
-        .attr("transform", d => `translate(${arcGenerator.centroid(d)})`)
-        .append("tspan")
-        .attr("x", "-0.3em")
-        .attr("y", "-0.1em")
-        .style("font-weight", "regular")
-        .text(d => `${valueFormat(valueFunc(d.data))}`)
-      .exit().remove();
+    const texts = g.selectAll("text")
+      .data(arcs);
+
+    texts.exit().remove();
+
+    texts.enter()
+      .append("text")
+      .append("tspan");
+
+    texts.attr("transform", d => `translate(${arcGenerator.centroid(d)})`)
+      .select("tspan")
+      .attr("x", "-0.3em")
+      .attr("y", "-0.1em")
+      .style("font-weight", "regular")
+      .text(d => `${valueFormat(valueFunc(d.data))}`);
   }
 
   _legend(node, labels, colorScale) {
@@ -83,38 +92,6 @@ class Pools extends Component {
       .append("g")
       .attr("class", "legend")
       .call(legend)
-  }
-
-  clearCharts() {
-    // CanThis is awful, the select.exit().remove() should work
-
-    select(this.legendRef)
-      .selectAll('*')
-      .remove();
-
-    select(this.typeLegendRef)
-      .selectAll('*')
-      .remove();
-
-    select(this.avgWorkerCountPerPoolRef)
-      .select('g')
-      .selectAll('*')
-      .remove();
-
-    select(this.avgWorkingCountPerPoolRef)
-      .select('g')
-      .selectAll('*')
-      .remove();
-
-    select(this.avgWorkerCountPerPoolTypeRef)
-      .select('g')
-      .selectAll('*')
-      .remove();
-
-    select(this.avgWorkingCountPerPoolTypeRef)
-      .select('g')
-      .selectAll('*')
-      .remove();
   }
 
   createPoolCharts() {

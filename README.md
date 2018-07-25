@@ -107,6 +107,11 @@ d3.js:
 
 react & d3:
 - D3.js in action chapter 9: https://github.com/emeeks/d3_in_action_2/tree/master/chapter9
+- [Silky smooth Piechart transitions with React and D3.js](https://swizec.com/blog/silky-smooth-piechart-transitions-react-d3js/swizec/8258)
+  - [Repo](https://github.com/Swizec/react-d3-pie/blob/master/src/App.js)
+- [How to Make a Piechart using React and d3](https://swizec.com/blog/how-to-make-a-piechart-using-react-and-d3/swizec/6785)
+- [React + D3v4 • Rusable Datavis & animations using modern javascript](https://swizec.com/reactd3js/)
+
 
 react, redux, websockets:
 - https://medium.com/@ianovenden/redux-websocket-integration-c1a0d22d3189
