@@ -51,6 +51,20 @@ Start your app by running npm start, and start debugging in VS Code by pressing 
 
 See [Debugging in the Editor](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-in-the-editor) for additional details regarding other editors.
 
+### Linting
+
+Because of https://github.com/facebook/create-react-app/pull/3850 still open as of 25th of July, the following is present in `client/package.json`:
+
+```json
+{
+  ...
+  "scripts": {
+    ...
+    "lint": "node node_modules/eslint/bin/eslint.js src/"
+  }
+}
+```
+
 ## Build
 
 ```

@@ -3,51 +3,51 @@ import { WEBSOCKET_CONNECT, WEBSOCKET_DISCONNECT } from '../lib/websocket/types'
 import {
   WEBSOCKET_RESUMECLEARINGHISTORY,
   WEBSOCKET_PAUSECLEARINGHISTORY,
-  WEBSOCKET_CLEARHISTORY
-} from '../actions/websocketActionsTypes';
+  WEBSOCKET_CLEARHISTORY,
+} from './websocketActionsTypes';
 
-export const simpleAction = () => dispatch => {
+export const simpleAction = () => (dispatch) => {
   dispatch({
     type: 'SIMPLE_ACTION',
-    payload: 'result_of_simple_action'
-  })
-}
+    payload: 'result_of_simple_action',
+  });
+};
 
-export const connectAction = () => dispatch => {
+export const connectAction = () => (dispatch) => {
   dispatch({
     type: WEBSOCKET_CONNECT,
     payload: {
       url: 'ws://localhost:8001/websocket',
-    }
+    },
   });
-}
+};
 
-export const disconnectAction = () => dispatch => {
+export const disconnectAction = () => (dispatch) => {
   dispatch({
     type: WEBSOCKET_DISCONNECT,
     payload: {
       automaticReconnect: false,
-    }
-  })
-}
+    },
+  });
+};
 
-export const clearHistoryAction = () => dispatch => {
+export const clearHistoryAction = () => (dispatch) => {
   dispatch({
     type: WEBSOCKET_CLEARHISTORY,
     payload: {},
-  })
-}
+  });
+};
 
-export const pauseClearingHistory = () => dispatch => {
+export const pauseClearingHistory = () => (dispatch) => {
   dispatch({
     type: WEBSOCKET_PAUSECLEARINGHISTORY,
     payload: {},
-  })
-}
+  });
+};
 
-export const resumeClearingHistory = () => dispatch => {
+export const resumeClearingHistory = () => (dispatch) => {
   dispatch({
     type: WEBSOCKET_RESUMECLEARINGHISTORY,
     payload: {},
-  })
-}
+  });
+};

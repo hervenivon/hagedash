@@ -1,35 +1,41 @@
-import { WEBSOCKET_OPEN,
-         WEBSOCKET_CLOSED,
-         WEBSOCKET_MESSAGE } from '../lib/websocket/types';
+import {
+  WEBSOCKET_OPEN,
+  WEBSOCKET_CLOSED,
+  WEBSOCKET_MESSAGE,
+} from '../lib/websocket/types';
 
-import { WEBSOCKET_RESUMECLEARINGHISTORY,
-         WEBSOCKET_PAUSECLEARINGHISTORY,
-         WEBSOCKET_CLEARHISTORY } from '../actions/websocketActionsTypes';
+import {
+  WEBSOCKET_RESUMECLEARINGHISTORY,
+  WEBSOCKET_PAUSECLEARINGHISTORY,
+  WEBSOCKET_CLEARHISTORY,
+} from '../actions/websocketActionsTypes';
 
 const initialState = {
   connected: false,
-  history: 10, // minutes
+  history: 5, // minutes
   records: 0,
-  data: []
+  data: [],
 };
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case WEBSOCKET_OPEN:
-      console.log('Websocket connection open');
-      state.connected = true;
+    case WEBSOCKET_OPEN: {
+      // eslint-disable-next-line
+      console.debug('Websocket connection open');
       return Object.assign({}, state, {
-        connected: true
+        connected: true,
       });
+    }
 
-    case WEBSOCKET_CLOSED:
-      console.log('Websocket connection closed');
-      state.connected = false;
+    case WEBSOCKET_CLOSED: {
+      // eslint-disable-next-line
+      console.debug('Websocket connection closed');
       return Object.assign({}, state, {
-        connected: false
+        connected: false,
       });
+    }
 
-    case WEBSOCKET_MESSAGE:
+    case WEBSOCKET_MESSAGE: {
       const tmpEntry = JSON.parse(action.payload.data);
       const newEntry = {
         date: new Date(tmpEntry.time * 1000), // We are receiving Unix Timestamp
@@ -39,39 +45,46 @@ export default (state = initialState, action = {}) => {
       };
       state.data.push(newEntry);
       // delete rows collected more than _history hour(s) ago
-      state.data = state.data.filter(e => e.date >= (new Date().getTime() - state.history * 60 * 1000));
+      const earliest = state.history * 60 * 1000;
+      const now = new Date().getTime();
+      state.data = state.data.filter(e => e.date >= (now - earliest));
       // update the number of records
       state.records = state.data.length;
       return Object.assign({}, state);
+    }
 
-    case WEBSOCKET_CLEARHISTORY:
+    case WEBSOCKET_CLEARHISTORY: {
       return Object.assign({}, state, {
         data: [],
       });
+    }
 
     /**
      *
      * Clear the data stored
      */
-    case WEBSOCKET_PAUSECLEARINGHISTORY:
+    case WEBSOCKET_PAUSECLEARINGHISTORY: {
       return Object.assign({}, state, {
         history: Infinity,
       });
+    }
 
-    case WEBSOCKET_RESUMECLEARINGHISTORY:
+    case WEBSOCKET_RESUMECLEARINGHISTORY: {
       let history = null;
 
       try {
         history = parseInt(action.payload.history, 10);
       } catch (e) {
-        history = initialState.history;
+        ({ history } = initialState);
       }
 
       return Object.assign({}, state, {
-        history: history ? history : initialState.history
+        history: history || initialState.history,
       });
+    }
 
-    default:
+    default: {
       return state;
+    }
   }
-}
+};
