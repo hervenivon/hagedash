@@ -99,6 +99,8 @@ $> ./hagedash_mock.py
 14. [ ] Data validation in the websocket handler
 15. [ ] Optimized computed properties (in order to avoid their computation within all components)
 16. [ ] Add tests 😇
+17. [ ] Fixing bugs
+- When we disconnect, and we clear history, the Pools remain fixed on the last values
 
 ### External resources
 
