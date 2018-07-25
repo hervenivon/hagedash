@@ -30,12 +30,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.onResize = this.onResize.bind(this)
     this.onHover = this.onHover.bind(this)
     this.onBrush = this.onBrush.bind(this)
-    this.state = { screenWidth: 1000, screenHeight: 500, hover: "none", brushExtent: [0,40] }
+    this.state = { screenWidth: 1000, screenHeight: 500, hover: "none", brushExtent: [0, 40] }
   }
 
   onResize() {
@@ -61,6 +61,10 @@ class App extends Component {
 
     return (
       <div className="container-fluid">
+        <div style={{display: "none"}}>
+          <pre>{ JSON.stringify(this.props) }</pre>
+          <pre>{ JSON.stringify(this.state) }</pre>
+        </div>
         <div className="row align-items-center App-header">
           <div className="col-2">
             <img src={logo} className="App-logo" alt="logo" />
@@ -69,27 +73,19 @@ class App extends Component {
             <h1 className="App-title">Buzzard realtime dashboard</h1>
           </div>
         </div>
-        <div>
-          <pre>
-            {
-              JSON.stringify(this.props)
-            }
-          </pre>
-
-          <pre>
-            { JSON.stringify(this.state) }
-          </pre>
-        </div>
+        <br />
         <Stats allData={allData} filteredData={filteredData} />
-        <br/>
-        <div>
-          <Button onClick={this.props.connectAction} color="primary">Connect</Button>{' '}
-          <Button onClick={this.props.disconnectAction} color="secondary">Disconnect</Button>{' '}
-          <Button onClick={this.props.pauseClearingHistory} color="secondary">Pause history cleaning</Button>{' '}
-          <Button onClick={this.props.resumeClearingHistory} color="secondary">Resume history cleaning</Button>{' '}
-          <Button onClick={this.props.clearHistoryAction} color="warning">Clear history</Button>
+        <br />
+        <div className="row align-items-center">
+          <div className="col-12 text-center">
+            <Button onClick={this.props.connectAction} color="primary">Connect</Button>{' '}
+            <Button onClick={this.props.disconnectAction} color="secondary">Disconnect</Button>{' '}
+            <Button onClick={this.props.pauseClearingHistory} color="secondary">Pause history cleaning</Button>{' '}
+            <Button onClick={this.props.resumeClearingHistory} color="secondary">Resume history cleaning</Button>{' '}
+            <Button onClick={this.props.clearHistoryAction} color="warning">Clear history</Button>
+          </div>
         </div>
-        <br/>
+        <br />
         <Pools data={filteredData} size={[this.state.screenWidth, this.state.screenWidth / 4]} />
       </div>
     );

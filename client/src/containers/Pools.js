@@ -7,7 +7,9 @@ import { nest, set } from 'd3-collection'
 import { pie, arc } from 'd3-shape'
 import { scaleOrdinal } from 'd3-scale'
 import { select } from 'd3-selection'
-import { transition } from 'd3-transition' // forced to import, otherwise a Cell.exit().transition not a function encountered
+
+// forced to import, otherwise d3-svg-legend triggers a Cell.exit().transition not a function encountered
+import { transition } from 'd3-transition'
 
 class Pools extends Component {
   constructor(props) {
