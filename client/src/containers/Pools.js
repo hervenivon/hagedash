@@ -86,11 +86,6 @@ class Pools extends Component {
       .text(d => `${valueFormat(valueFunc(d.data))}`);
   }
 
-  constructor(props) {
-    super(props);
-    this.createPoolCharts = this.createPoolCharts.bind(this);
-  }
-
   componentDidMount() {
     this.createPoolCharts();
   }
