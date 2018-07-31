@@ -109,7 +109,7 @@ class App extends Component {
             <img src={logo} className="App-logo" alt="logo" />
           </div>
           <div className="col-10">
-            <h1>Buzzard realtime dashboard</h1>
+            <h2>Buzzard dashboard</h2>
           </div>
         </div>
         <br />
