@@ -99,30 +99,39 @@ $> ./hagedash_mock.py
 14. [ ] Data validation in the websocket handler
 15. [ ] Optimized computed properties (in order to avoid their computation within all components)
 16. [ ] Add tests 😇
-17. [ ] Fixing bugs
+17. [ ] Update `App.js` `brushExtent` when data update
+- A working implementation is done in `src/containers/Selector.js (l. 75)` but it stops the React event loop
+18. [ ] Add number of even as bar on the selector
+99. [ ] Fixing bugs
 - [X] When we disconnect, and we clear history, the Pools remain fixed on the last values
+- [ ] Resizing donut charts doesn't work when screens are really small (because of `src/containers/Piechart.js (l. 39)`)
 
 ### External resources
 
 d3.js:
 - https://github.com/d3/d3/wiki/gallery
-- Interactive drop down: http://bl.ocks.org/jonahwilliams/2f16643b999ada7b1909
-- brush snapping: https://bl.ocks.org/mbostock/6232537
-- brush and zoom: https://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172
-- scatterplot brush: https://rajvansia.com/scatterplotbrush-d3-v4.html
+- [Interactive drop down](http://bl.ocks.org/jonahwilliams/2f16643b999ada7b1909)
+- [brush snapping](https://bl.ocks.org/mbostock/6232537)
+- [brush and zoom](https://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172)
+- [scatterplot brush](https://rajvansia.com/scatterplotbrush-d3-v4.html)
 - additional brushing:
   - https://www.visualcinnamon.com/2016/07/brush-bar-chart-d3.html
   - http://bl.ocks.org/nbremer/326fb6de768e85261bfd47aa1f497863
-- reusable donut chart: https://bl.ocks.org/mbhall88/b2504f8f3e384de4ff2b9dfa60f325e2
+- [D3 Donut Chart @Observable](https://beta.observablehq.com/@mbostock/d3-donut-chart)
+- [reusable donut chart](https://bl.ocks.org/mbhall88/b2504f8f3e384de4ff2b9dfa60f325e2)
+- [Pie Chart Update, V](https://bl.ocks.org/mbostock/5682158)
+- [Pie Chart](https://bl.ocks.org/mbostock/3887235)
 - Interactive sankey (no dcjs but d3v3):
   - https://bl.ocks.org/wvengen/2a71af9df0a0655a470d
   - https://github.com/q-m/d3.chart.sankey
-- official d3js v4 sankey: https://github.com/d3/d3-sankey
-- sankey MBostock: https://beta.observablehq.com/@mbostock/d3-sankey-diagram
-- Toward reusable charts: https://bost.ocks.org/mike/chart/
+- [official d3js v4 sankey](https://github.com/d3/d3-sankey)
+- [Sankey MBostock](https://beta.observablehq.com/@mbostock/d3-sankey-diagram)
+- [Toward reusable charts](https://bost.ocks.org/mike/chart/)
+- [d3-legend](http://d3-legend.susielu.com/)
 
 react & d3:
 - D3.js in action chapter 9: https://github.com/emeeks/d3_in_action_2/tree/master/chapter9
+- [React & D3 v4 example - Enter,Update,Exit Transition](https://bl.ocks.org/shimizu/7b198ba0dd29ccbba60c35a8b2d33160)
 - [Silky smooth Piechart transitions with React and D3.js](https://swizec.com/blog/silky-smooth-piechart-transitions-react-d3js/swizec/8258)
   - [Repo](https://github.com/Swizec/react-d3-pie/blob/master/src/App.js)
 - [How to Make a Piechart using React and d3](https://swizec.com/blog/how-to-make-a-piechart-using-react-and-d3/swizec/6785)
@@ -148,7 +157,7 @@ react, redux, websockets:
 - (interesting, not that much): https://peteris.rocks/blog/real-time-stats-with-websockets-and-react/
 
 data:
-- Use d3 to manipulate nested data: http://learnjsdata.com/group_data.html
+- [Use d3 to manipulate nested data](http://learnjsdata.com/group_data.html)
 
 d3.js, dc.js, crossfilters:
 - Interactive Sankey (d3v3): http://bl.ocks.org/tonmcg/570fb0409b6c59768229d5631bc3d77e
@@ -166,6 +175,7 @@ dataviz:
 
 css:
 - https://getbootstrap.com/docs/4.1/getting-started/introduction/
+- [react + bootstrap](https://reactstrap.github.io/components/buttons/)
 
 python:
 - https://python-socketio.readthedocs.io/en/latest/

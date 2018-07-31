@@ -69,6 +69,12 @@ class Pools extends Component {
     return (
       <div className="poolsContainer">
         <div className="row align-items-center no-gutters">
+          <div className="col-3 text-center"><p>Average worker count per pool</p></div>
+          <div className="col-3 text-center"><p>Average working count per pool</p></div>
+          <div className="col-3 text-center"><p>Average worker count per pool type</p></div>
+          <div className="col-3 text-center"><p>Average working count per pool type</p></div>
+        </div>
+        <div className="row align-items-center no-gutters">
           <div className="col-3">
             <Piechart
               data={nestedPools}
