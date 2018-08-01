@@ -139,15 +139,12 @@ class Pools extends Component {
   }
 }
 
-Pools.defaultProps = {
-  width: 0,
-  height: 0,
-};
+Pools.defaultProps = {};
 
 Pools.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  width: PropTypes.number,
-  height: PropTypes.number,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
 };
 
 export default Pools;

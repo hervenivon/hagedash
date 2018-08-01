@@ -86,9 +86,9 @@ $> ./hagedash_mock.py
 1. [X] Set the development pipeline (https://reactjs.org/docs/create-a-new-react-app.html)
 2. [X] Build the data management through websockets
 3. [ ] Build the bar charts
-4. [ ] Build the donut chart
-5. [ ] Build the timeline chart
-6. [ ] Build the brush over timeline for selection
+4. [X] Build the donut chart
+5. [X] Build the timeline chart
+6. [X] Build the brush over timeline for selection
 7. [ ] Build the interactive sankey
 8. [ ] Set the building process for distribution along with `buzzard`
 9. [X] Make the distribution trough `./hagedash.py`
@@ -105,6 +105,7 @@ $> ./hagedash_mock.py
 19. [ ] Update performance:
 - with `shouldComponentUpdate` http://buildwithreact.com/article/optimizing-with-shouldcomponentupdate or `componentWillReceiveProps`
 - https://medium.com/@tibotiber/react-d3-js-balancing-performance-developer-experience-4da35f912484
+20. [ ] Moves `src/containers/Pools.js` data preparation to `src/reducers/websocketReducer.js`
 99. [ ] Fixing bugs
 - [X] When we disconnect, and we clear history, the Pools remain fixed on the last values
 - [ ] Resizing donut charts doesn't work when screens are really small (because of `src/containers/Piechart.js (l. 39)`)

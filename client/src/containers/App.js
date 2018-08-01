@@ -84,8 +84,10 @@ class App extends Component {
     } = this;
     const availableWidth = screenWidth - 15 * 2/* bootstrap padding */;
 
-    /** Processing and filtering data */
-
+    /**
+     * Data filtering
+     * any processing handled by the middleware @ src/reducers/websocketReducer.js
+     */
     function filterData(e) {
       if (brushExtent[0] === null || brushExtent[1] === null
           || (e.date >= brushExtent[0] && e.date <= brushExtent[1])) {
@@ -136,8 +138,9 @@ class App extends Component {
           <br />
           <Selector
             range={[minDate, maxDate]}
+            data={allData}
             width={availableWidth}
-            height={40}
+            height={60}
             changeBrush={this.onBrush}
           />
           <br /><br />

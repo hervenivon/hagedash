@@ -40,14 +40,20 @@ export default (state = initialState, action = {}) => {
       const newEntry = {
         date: new Date(tmpEntry.time * 1000), // We are receiving Unix Timestamp
         pools: tmpEntry.pools,
+        nbrPools: Object.keys(tmpEntry.pools).length,
         rasters: tmpEntry.rasters,
+        nbrRasters: Object.keys(tmpEntry.rasters).length,
         queries: tmpEntry.queries,
+        nbrQueries: Object.keys(tmpEntry.queries).length,
       };
       state.data.push(newEntry);
+
       // delete rows collected more than _history hour(s) ago
       const earliest = state.history * 60 * 1000;
       const now = new Date().getTime();
+
       state.data = state.data.filter(e => e.date >= (now - earliest));
+
       // update the number of records
       state.records = state.data.length;
       return Object.assign({}, state);
