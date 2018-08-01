@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import websocketReducer from './websocketReducer';
+import buzzardReducer from './buzzardReducer';
 
 export default combineReducers({
-  buzzard: websocketReducer,
+  buzzard: buzzardReducer,
 });

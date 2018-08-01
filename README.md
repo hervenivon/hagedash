@@ -101,11 +101,13 @@ $> ./hagedash_mock.py
 16. [ ] Add tests 😇
 17. [ ] Update `App.js` `brushExtent` when data update
 - A working implementation is done in `src/containers/Selector.js (l. 75)` but it stops the React event loop
+- Use Redux instead, move the filtering action and brushextent to the redux in `src/reducers/buzzardReducer.js`
 18. [ ] Add number of even as bar on the selector
 19. [ ] Update performance:
 - with `shouldComponentUpdate` http://buildwithreact.com/article/optimizing-with-shouldcomponentupdate or `componentWillReceiveProps`
 - https://medium.com/@tibotiber/react-d3-js-balancing-performance-developer-experience-4da35f912484
-20. [ ] Moves `src/containers/Pools.js` data preparation to `src/reducers/websocketReducer.js`
+20. [ ] Moves as much as possible data preparation from `src/containers/Pools.js` to redux in `src/reducers/buzzardReducer.js`
+21. [ ] When filtered data is empty display a message instead of nothing
 99. [ ] Fixing bugs
 - [X] When we disconnect, and we clear history, the Pools remain fixed on the last values
 - [ ] Resizing donut charts doesn't work when screens are really small (because of `src/containers/Piechart.js (l. 39)`)
