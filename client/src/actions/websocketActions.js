@@ -6,13 +6,6 @@ import {
   WEBSOCKET_CLEARHISTORY,
 } from './websocketActionsTypes';
 
-export const simpleAction = () => (dispatch) => {
-  dispatch({
-    type: 'SIMPLE_ACTION',
-    payload: 'result_of_simple_action',
-  });
-};
-
 export const connectAction = () => (dispatch) => {
   dispatch({
     type: WEBSOCKET_CONNECT,
