@@ -10,15 +10,26 @@ import {
   WEBSOCKET_CLEARHISTORY,
 } from '../actions/websocketActionsTypes';
 
+import {
+  D3_SETBRUSHEXTENT,
+  D3_SETZOOMINFO,
+} from '../actions/d3ActionsTypes';
+
 const initialState = {
   connected: false,
   history: 5, // minutes
   records: 0,
   data: [],
+  brushExtent: [null, null],
+  info: null,
 };
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
+    // *********************************************************************************************
+    //                          Websocket middleware actions (`src/lib/websocket`)
+    // *********************************************************************************************
+
     case WEBSOCKET_OPEN: {
       // eslint-disable-next-line
       console.debug('Websocket connection open');
@@ -59,6 +70,11 @@ export default (state = initialState, action = {}) => {
       return Object.assign({}, state);
     }
 
+
+    // *********************************************************************************************
+    //                                     Buzzard dashboard actions
+    // *********************************************************************************************
+
     case WEBSOCKET_CLEARHISTORY: {
       return Object.assign({}, state, {
         data: [],
@@ -88,6 +104,42 @@ export default (state = initialState, action = {}) => {
         history: history || initialState.history,
       });
     }
+
+
+    // *********************************************************************************************
+    //                          Websocket middleware actions (`src/lib/websocket`)
+    // *********************************************************************************************
+
+    case D3_SETBRUSHEXTENT: {
+      try {
+        const newBrushExtent = action.payload.brushExtent;
+
+        if (newBrushExtent[0] !== state.brushExtent[0]
+            || newBrushExtent[1] !== state.brushExtent[1]) {
+          return Object.assign({}, state, {
+            brushExtent: newBrushExtent,
+          });
+        }
+        return state;
+      } catch (e) {
+        return state;
+      }
+    }
+
+    case D3_SETZOOMINFO: {
+      const newState = Object.assign({}, state, {
+        info: action.payload.info,
+      });
+
+      if (action.payload.info || action.payload.info !== state.info) {
+        return newState;
+      }
+      return state;
+    }
+
+    // *********************************************************************************************
+    //                                        Default
+    // *********************************************************************************************
 
     default: {
       return state;

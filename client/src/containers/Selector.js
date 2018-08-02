@@ -67,7 +67,8 @@ class Selector extends Component {
     const keys = ['rasters', 'queries'];
     const domain = getArrayOfDates(dateRange[0], dateRange[1]);
     const rangeX = [0, width];
-    const rangeY = [0, (height / 3) * 2 - 5]; // minus 5 to let space for the brush whatever happens
+    // minus 10 to let space for the brush whatever happens
+    const rangeY = [0, (height / 3) * 2 - 15];
     const xScale0 = scaleBand().domain(domain).rangeRound(rangeX).paddingInner(0.1);
     const xScale1 = scaleBand().domain(keys).rangeRound([0, xScale0.bandwidth()]).padding(0.05);
     const yScale = scaleLinear().domain([0, maxData]).range(rangeY);
@@ -182,7 +183,7 @@ class Selector extends Component {
     }
 
     const dayBrush = brushX()
-      .extent([[0, 0], [width, (height / 3) * 2]])
+      .extent([[0, 0], [width, (height / 3) * 3]])
       .on('end', brushed);
 
     select(node)
@@ -233,7 +234,7 @@ class Selector extends Component {
       .data(data)
       .attr('transform', d => `translate(${xScale0(d.date)},0)`)
       .on('mouseover', d => onHover(`${d.nbrRasters} rasters for ${d.nbrQueries} queries`))
-      .on('mouseout', onHover(null));
+      .on('mouseout', () => onHover(null));
 
     // Dynamic data generation to fit the grouped bar chart schema
     function getXScale1Data(d) {

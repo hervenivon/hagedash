@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  Card, CardBody, CardHeader, CardText, CardDeck,
+} from 'reactstrap';
 import moment from 'moment';
 import { extent } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
@@ -28,20 +31,36 @@ const Infos = ({ filteredData, allData, zoomInfo }) => {
 
   return (
     <div className="row statsContainer">
-      <div className="col-6">
-        <span>
-          {filteredLength}/{allLength}{' '}records selected over a periode of{' '}{durationMin}{' '}minute(s).{' '}
-        </span>
-        <br />
-        <span>
-          {allUniqQueries.length}{' '}uniq queries.{' '}
-        </span>
-        <br />
-        <span>
-          {'Minimum selected Date: '}{formatDate(minFilteredDate)}{' / '}{'Maximum selected Date: '}{formatDate(maxFilteredDate)}
-        </span>
+      <div className="col-12">
+        <CardDeck>
+          <Card>
+            <CardHeader>General information</CardHeader>
+            <CardBody>
+              <CardText>
+                <span>
+                  {filteredLength}/{allLength}{' '}records selected over a periode of{' '}{durationMin}{' '}minute(s).{' '}
+                </span>
+                <br />
+                <span>
+                  {allUniqQueries.length}{' '}uniq queries.{' '}
+                </span>
+                <br />
+                <span>
+                  {'Minimum selected Date: '}{formatDate(minFilteredDate)}{' / '}{'Maximum selected Date: '}{formatDate(maxFilteredDate)}
+                </span>
+              </CardText>
+            </CardBody>
+          </Card>
+          <Card>
+            <CardHeader>Zoom information</CardHeader>
+            <CardBody>
+              <CardText>
+                <p>{zoomInfo}</p>
+              </CardText>
+            </CardBody>
+          </Card>
+        </CardDeck>
       </div>
-      <div className="col-6">{ zoomInfo }</div>
     </div>
   );
 };

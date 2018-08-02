@@ -1,20 +1,18 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Alert, Button, ButtonGroup } from 'reactstrap';
+import { Alert, Container } from 'reactstrap';
 import { extent } from 'd3-array';
 
 import {
-  connectAction,
-  disconnectAction,
-  clearHistoryAction,
-  pauseClearingHistory,
-  resumeClearingHistory,
-} from '../actions/websocketActions';
+  setZoomInfo,
+  setBrushExtent,
+} from '../actions/d3Actions';
 
 import './App.css';
-import logo from '../logo.svg';
 
+import Actions from './Actions';
+import NavBar from './NavBar';
 import Infos from './Infos';
 import Pools from './Pools';
 import Selector from './Selector';
@@ -24,21 +22,17 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  connectActionProp: () => dispatch(connectAction()),
-  disconnectActionProp: () => dispatch(disconnectAction()),
-  clearHistoryActionProp: () => dispatch(clearHistoryAction()),
-  pauseClearingHistoryProp: () => dispatch(pauseClearingHistory()),
-  resumeClearingHistoryProp: () => dispatch(resumeClearingHistory()),
+  setZoomInfoProp: info => dispatch(setZoomInfo(info)),
+  setBrushExtentProp: (x0, x1) => dispatch(setBrushExtent(x0, x1)),
 });
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.onResize = this.onResize.bind(this);
-    this.onHover = this.onHover.bind(this);
     this.onBrush = this.onBrush.bind(this);
     this.state = {
-      screenWidth: 1000, screenHeight: 500, brushExtent: [null, null], info: null,
+      screenWidth: 1000, screenHeight: 500, brushExtent: [null, null],
     };
   }
 
@@ -49,13 +43,6 @@ class App extends Component {
 
   onResize() {
     this.setState({ screenWidth: window.innerWidth, screenHeight: window.innerHeight - 120 });
-  }
-
-  // eslint-disable-next-line
-  onHover(info) {
-    // this.setState({ info });
-    // eslint-disable-next-line
-    console.debug(info);
   }
 
   onBrush(d) {
@@ -72,18 +59,16 @@ class App extends Component {
       props: {
         buzzard: {
           data: allData,
+          info: zoomInfo,
         },
-        connectActionProp,
-        disconnectActionProp,
-        pauseClearingHistoryProp,
-        resumeClearingHistoryProp,
-        clearHistoryActionProp,
+        setZoomInfoProp,
+        // eslint-disable-next-line
+        setBrushExtentProp,
       },
       state: {
         screenWidth,
         // screenHeight,
         brushExtent,
-        info,
       },
     } = this;
     const availableWidth = screenWidth - 15 * 2/* bootstrap padding */;
@@ -103,42 +88,12 @@ class App extends Component {
     const [minDate, maxDate] = extent(allData, d => d.date);
     const filteredData = allData.filter(filterData);
 
-    const header = (
-      <div>
-        <div style={{ display: 'none' }}>
-          <pre>{ JSON.stringify(this.props) }</pre>
-          <pre>{ JSON.stringify(this.state) }</pre>
-          <pre>{ JSON.stringify([minDate, maxDate]) }</pre>
-        </div>
-        <div className="row align-items-center App-header">
-          <div className="col-2">
-            <img src={logo} className="App-logo" alt="logo" />
-          </div>
-          <div className="col-10">
-            <h2>Buzzard dashboard</h2>
-          </div>
-        </div>
-        <br />
-        <div className="row align-items-center">
-          <div className="col-12 text-center">
-            <ButtonGroup>
-              <Button onClick={connectActionProp} color="primary">Connect</Button>{' '}
-              <Button onClick={disconnectActionProp} color="secondary">Disconnect</Button>{' '}
-              <Button onClick={pauseClearingHistoryProp} color="secondary">Pause history cleaning</Button>{' '}
-              <Button onClick={resumeClearingHistoryProp} color="secondary">Resume history cleaning</Button>{' '}
-              <Button onClick={clearHistoryActionProp} color="warning">Clear history</Button>
-            </ButtonGroup>
-          </div>
-        </div>
-      </div>
-    );
-
     let body = null;
     if (allData.length > 0) {
       body = (
         <div>
           <br />
-          <Infos allData={allData} filteredData={filteredData} zoomInfo={info} />
+          <Infos allData={allData} filteredData={filteredData} zoomInfo={zoomInfo} />
           <br />
           <Selector
             dateRange={[minDate, maxDate]}
@@ -146,7 +101,7 @@ class App extends Component {
             width={availableWidth}
             height={80}
             changeBrush={this.onBrush}
-            onHover={this.onHover}
+            onHover={setZoomInfoProp}
           />
           <br />
           <Pools
@@ -168,29 +123,32 @@ class App extends Component {
     }
 
     return (
-      <div className="container-fluid">{header}{body}</div>
+      <div>
+        <div className="row" style={{ display: 'none' }}>
+          <div className="col-12">
+            <pre>{ JSON.stringify(this.props) }</pre>
+            <pre>{ JSON.stringify(this.state) }</pre>
+            <pre>{ JSON.stringify([minDate, maxDate]) }</pre>
+          </div>
+        </div>
+        <NavBar />
+        <br />
+        <Actions />
+        <Container fluid>
+          {/* {header} */}
+          {body}
+        </Container>
+      </div>
     );
   }
 }
 
-App.defaultProps = {
-  buzzard: {
-    data: [],
-  },
-  connectActionProp: () => {},
-  disconnectActionProp: () => {},
-  pauseClearingHistoryProp: () => {},
-  resumeClearingHistoryProp: () => {},
-  clearHistoryActionProp: () => {},
-};
+App.defaultProps = {};
 
 App.propTypes = {
-  buzzard: PropTypes.instanceOf(Object),
-  connectActionProp: PropTypes.func,
-  disconnectActionProp: PropTypes.func,
-  pauseClearingHistoryProp: PropTypes.func,
-  resumeClearingHistoryProp: PropTypes.func,
-  clearHistoryActionProp: PropTypes.func,
+  buzzard: PropTypes.instanceOf(Object).isRequired,
+  setZoomInfoProp: PropTypes.func.isRequired,
+  setBrushExtentProp: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
