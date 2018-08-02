@@ -15,7 +15,7 @@ import {
 import './App.css';
 import logo from '../logo.svg';
 
-import Stats from './Stats';
+import Infos from './Infos';
 import Pools from './Pools';
 import Selector from './Selector';
 
@@ -38,7 +38,7 @@ class App extends Component {
     this.onHover = this.onHover.bind(this);
     this.onBrush = this.onBrush.bind(this);
     this.state = {
-      screenWidth: 1000, screenHeight: 500, hover: 'none', brushExtent: [null, null],
+      screenWidth: 1000, screenHeight: 500, brushExtent: [null, null], info: null,
     };
   }
 
@@ -51,8 +51,11 @@ class App extends Component {
     this.setState({ screenWidth: window.innerWidth, screenHeight: window.innerHeight - 120 });
   }
 
-  onHover(d) {
-    this.setState({ hover: d.id });
+  // eslint-disable-next-line
+  onHover(info) {
+    // this.setState({ info });
+    // eslint-disable-next-line
+    console.debug(info);
   }
 
   onBrush(d) {
@@ -80,6 +83,7 @@ class App extends Component {
         screenWidth,
         // screenHeight,
         brushExtent,
+        info,
       },
     } = this;
     const availableWidth = screenWidth - 15 * 2/* bootstrap padding */;
@@ -134,7 +138,7 @@ class App extends Component {
       body = (
         <div>
           <br />
-          <Stats allData={allData} filteredData={filteredData} />
+          <Infos allData={allData} filteredData={filteredData} zoomInfo={info} />
           <br />
           <Selector
             dateRange={[minDate, maxDate]}
@@ -142,6 +146,7 @@ class App extends Component {
             width={availableWidth}
             height={80}
             changeBrush={this.onBrush}
+            onHover={this.onHover}
           />
           <br />
           <Pools

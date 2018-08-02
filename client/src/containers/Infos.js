@@ -5,7 +5,7 @@ import { extent } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
 import array from 'lodash/array';
 
-const Stats = ({ filteredData, allData }) => {
+const Infos = ({ filteredData, allData, zoomInfo }) => {
   const { length: allLength } = allData;
   const { length: filteredLength } = filteredData;
   const [minDate, maxDate] = extent(allData, d => d.date);
@@ -28,7 +28,7 @@ const Stats = ({ filteredData, allData }) => {
 
   return (
     <div className="row statsContainer">
-      <div className="col">
+      <div className="col-6">
         <span>
           {filteredLength}/{allLength}{' '}records selected over a periode of{' '}{durationMin}{' '}minute(s).{' '}
         </span>
@@ -41,13 +41,19 @@ const Stats = ({ filteredData, allData }) => {
           {'Minimum selected Date: '}{formatDate(minFilteredDate)}{' / '}{'Maximum selected Date: '}{formatDate(maxFilteredDate)}
         </span>
       </div>
+      <div className="col-6">{ zoomInfo }</div>
     </div>
   );
 };
 
-Stats.propTypes = {
-  allData: PropTypes.arrayOf(PropTypes.object).isRequired,
-  filteredData: PropTypes.arrayOf(PropTypes.object).isRequired,
+Infos.defaultProps = {
+  zoomInfo: '',
 };
 
-export default Stats;
+Infos.propTypes = {
+  allData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filteredData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  zoomInfo: PropTypes.string,
+};
+
+export default Infos;

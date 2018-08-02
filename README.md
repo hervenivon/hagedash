@@ -113,6 +113,7 @@ $> ./hagedash_mock.py
 - [X] When we disconnect, and we clear history, the Pools remain fixed on the last values
 - [ ] Resizing donut charts doesn't work when screens are really small (because of `src/containers/Piechart.js (l. 39)`)
 - [ ] In `src/containers/Selector.js` the d3.event cannot be accessed. Therefore a trick fix has been implemented in `function brushed()` accessing a private object
+- [ ] When "Clear History" action is dispatch, the extent remains with the old value, this will be solved moving everything to redux
 
 ### External resources
 
