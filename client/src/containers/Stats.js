@@ -27,7 +27,7 @@ const Stats = ({ filteredData, allData }) => {
   );
 
   return (
-    <div className="row">
+    <div className="row statsContainer">
       <div className="col">
         <span>
           {filteredLength}/{allLength}{' '}records selected over a periode of{' '}{durationMin}{' '}minute(s).{' '}

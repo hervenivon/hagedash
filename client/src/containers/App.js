@@ -137,13 +137,13 @@ class App extends Component {
           <Stats allData={allData} filteredData={filteredData} />
           <br />
           <Selector
-            range={[minDate, maxDate]}
+            dateRange={[minDate, maxDate]}
             data={allData}
             width={availableWidth}
-            height={60}
+            height={80}
             changeBrush={this.onBrush}
           />
-          <br /><br />
+          <br />
           <Pools
             data={filteredData}
             width={availableWidth}

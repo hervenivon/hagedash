@@ -4,10 +4,28 @@ import colorbrewer from 'colorbrewer';
 import { axisBottom } from 'd3-axis';
 import { max } from 'd3-array';
 import { brushX /* , brushSelection */ } from 'd3-brush';
-import { scaleLinear, scaleOrdinal, scaleTime } from 'd3-scale';
-import { select, event } from 'd3-selection';
+import { interpolateDate } from 'd3-interpolate';
+import {
+  scaleBand, scaleLinear, scaleOrdinal, scaleQuantize,
+} from 'd3-scale';
+import { select /* , event as currentEvent */ } from 'd3-selection';
 import { timeFormat } from 'd3-time-format';
 import './App.css';
+
+function getArrayOfDates(start, end) {
+  if (start === end) {
+    return [start];
+  }
+
+  const res = [];
+  const tmp = new Date(start); // prevent infinite loop if start == end (as object)
+
+  while (tmp <= end) {
+    res.push(new Date(tmp));
+    tmp.setSeconds(tmp.getSeconds() + 1);
+  }
+  return res;
+}
 
 class Selector extends Component {
   constructor(props) {
@@ -28,7 +46,7 @@ class Selector extends Component {
       props: {
         changeBrush,
         data,
-        range,
+        dateRange,
         width,
         height,
       },
@@ -40,18 +58,44 @@ class Selector extends Component {
     // *********************************************************************************************
 
     const maxData = max(data.map((d) => {
-      // Forced to use `tmp` assignment, results where undefined otherwise
+      // Forced to use `tmp` assignment, results where undefined otherwise...
       const tmp = [d.nbrRasters, d.nbrQueries];
       return max(tmp);
     }));
 
-    const xScale = scaleTime().domain(range).rangeRound([0, width]);
-    const yScale = scaleLinear().domain([0, maxData]).range([0, height / 2]);
+    const keys = ['rasters', 'queries'];
+    const domain = getArrayOfDates(dateRange[0], dateRange[1]);
+    const rangeX = [0, width];
+    const rangeY = [0, height / 2];
+    const xScale0 = scaleBand().domain(domain).rangeRound(rangeX).paddingInner(0.1);
+    const xScale1 = scaleBand().domain(keys).rangeRound([0, xScale0.bandwidth()]).padding(0.05);
+    const yScale = scaleLinear().domain([0, maxData]).range(rangeY);
 
-    const colorScale = scaleOrdinal().domain(['queries', 'rasters']).range(colorbrewer.YlGnBu[3]);
+    const colorScale = scaleOrdinal().domain(keys).range(colorbrewer.YlGnBu[3]);
 
+    // D3's scaleBand doesn't offer an invert function, we build it
+    // eslint-disable-next-line
+    xScale0.invert = (function () {
+      const xScale0Range = xScale0.domain();
+      const xScale0Domain = xScale0.range();
+      const invertScale = scaleQuantize().domain(xScale0Domain).range(xScale0Range);
+
+      return (x) => {
+        const res = new Date(invertScale(x));
+        return res;
+      };
+    }());
+
+    // *********************************************************************************************
+    //                                      Setting the axis
+    // *********************************************************************************************
+
+    const dayAxisInterpolator = interpolateDate(dateRange[0], dateRange[1]);
     const dayAxis = axisBottom()
-      .tickFormat(timeFormat('%H:%M:%S')).scale(xScale);
+      .tickValues([0.0, 0.25, 0.5, 0.75, 1].map(d => new Date(dayAxisInterpolator(d))))
+      .tickFormat(timeFormat('%H:%M:%S'))
+      .scale(xScale0);
+
 
     // *********************************************************************************************
     //                                     Setting bar chart
@@ -64,46 +108,104 @@ class Selector extends Component {
       .append('g')
       .attr('class', 'barchart');
 
+    // what to do on enter
     select(node)
       .select('g.barchart')
-      .selectAll('rect.bar')
+      .selectAll('g.barchartgroup')
       .data(data)
       .enter()
-      .append('rect')
-      .attr('class', 'bar');
+      .append('g')
+      .attr('class', 'barchartgroup');
 
+    // what to do on exit
     select(node)
       .select('g.barchart')
-      .selectAll('rect.bar')
+      .selectAll('g.barchartgroup')
       .data(data)
       .exit()
       .remove();
 
-    const barWidth = width / data.length;
-
+    // what to do on update
     select(node)
       .select('g.barchart')
-      .selectAll('rect.bar')
+      .selectAll('g.barchartgroup')
       .data(data)
-      .attr('x', (d, i) => i * barWidth)
-      .attr('y', d => (height / 3) * 2 - yScale(d.nbrRasters))
-      .attr('height', d => yScale(d.nbrRasters))
-      .attr('width', barWidth)
-      .style('fill', colorScale('rasters')) // (d, i) => colorScale('rasters')
-      .style('stroke', 'black')
-      .style('stroke-opacity', 0.25);
+      .attr('transform', d => `translate(${xScale0(d.date)},0)`);
+
+
+    // Dynamic data generation to fit the grouped bar chart schema
+    function getXScale1Data(d) {
+      return keys.map((k) => {
+        let tmpVal;
+        if (k === 'rasters') {
+          tmpVal = d.nbrRasters;
+        }
+        if (k === 'queries') {
+          tmpVal = d.nbrQueries;
+        }
+        return { key: k, value: tmpVal };
+      });
+    }
+
+    // what to do on enter
+    select(node)
+      .select('g.barchart')
+      .selectAll('g.barchartgroup')
+      .selectAll('rect.bar')
+      .data(d => getXScale1Data(d))
+      .enter()
+      .append('rect')
+      .attr('class', 'bar');
+
+    // what to do on exit
+    select(node)
+      .select('g.barchart')
+      .selectAll('g.barchartgroup')
+      .selectAll('rect.bar')
+      .data(d => getXScale1Data(d))
+      .exit()
+      .remove();
+
+    // what to do on update
+    select(node)
+      .select('g.barchart')
+      .selectAll('g.barchartgroup')
+      .selectAll('rect.bar')
+      .data(d => getXScale1Data(d))
+      .attr('x', d => xScale1(d.key))
+      .attr('y', d => yScale(d.value))
+      .attr('width', xScale1.bandwidth())
+      .attr('height', d => (height / 3) * 2 - yScale(d.value))
+      .style('fill', d => colorScale(d.key));
+
 
     // *********************************************************************************************
     //                              Setting brush's elements and Axis
     // *********************************************************************************************
 
     function brushed() {
-      if (!event.sourceEvent) return; // Only transition after input.
-      if (!event.selection) { // Clear empty selection.
+      // // The normal d3 schema is not working, the currentEvent appears being empty all the time
+      //
+      // if (!currentEvent.sourceEvent) return; // Only transition after input.
+      // // eslint-disable-next-line
+      // if (!currentEvent.selection) { // Clear empty selection.
+      //   changeBrush([null, null]);
+      //   return;
+      // }
+      // // eslint-disable-next-line
+      // const selectedExtent = currentEvent.selection.map(d => xScale0.invert(d));
+      // we replace it with a trick accessing at the internal __brush variable.
+
+      // eslint-disable-next-line
+      const thisBrush = this.__brush;
+      if (!thisBrush) return;
+      if (!thisBrush.selection) {
         changeBrush([null, null]);
         return;
       }
-      const selectedExtent = event.selection.map(d => xScale.invert(d));
+
+      const selection = [thisBrush.selection[0][0], thisBrush.selection[1][0]];
+      const selectedExtent = selection.map(d => xScale0.invert(d));
 
       // (option) implement a snapping like function: https://bl.ocks.org/mbostock/6232537
 
@@ -143,23 +245,27 @@ class Selector extends Component {
         //   const selectedExtent = (actualPixelSelection || []).map(e => xScale.invert(e));
         //   // the following stops the react refresh 'event loop'
         //   // if (actualPixelSelection) changeBrush(selectedExtent);
-        //   // the following used to triggers an exception (Maximum update depth exceeded) until
-        //   // I conditioned the App.onBrush function:
+        //   // the following used to triggers an exception (Maximum update depth exceeded)
         //   changeBrush(selectedExtent); // call the function given function
         // }
       });
 
+    // add the brush group to the main node
     select(node)
       .selectAll('g.brush')
       .data([0])
       .enter()
       .append('g')
-      .attr('class', 'brush')
-      .attr('transform', 'translate(0,0)');
+      .attr('class', 'brush');
   }
 
   render() {
-    const { width, height } = this.props;
+    const {
+      props: {
+        width,
+        height,
+      },
+    } = this;
     return (
       <div className="row align-items-center no-gutters selectorContainer">
         <div className="col-12">
@@ -179,7 +285,7 @@ Selector.propTypes = {
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
   changeBrush: PropTypes.func,
-  range: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
+  dateRange: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
 };
 
 export default Selector;

@@ -108,9 +108,11 @@ $> ./hagedash_mock.py
 - https://medium.com/@tibotiber/react-d3-js-balancing-performance-developer-experience-4da35f912484
 20. [ ] Moves as much as possible data preparation from `src/containers/Pools.js` to redux in `src/reducers/buzzardReducer.js`
 21. [ ] When filtered data is empty display a message instead of nothing
+22. [ ] Replace d3-svg-legend by native d3
 99. [ ] Fixing bugs
 - [X] When we disconnect, and we clear history, the Pools remain fixed on the last values
 - [ ] Resizing donut charts doesn't work when screens are really small (because of `src/containers/Piechart.js (l. 39)`)
+- [ ] In `src/containers/Selector.js` the d3.event cannot be accessed. Therefore a trick fix has been implemented in `function brushed()` accessing a private object
 
 ### External resources
 

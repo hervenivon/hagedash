@@ -8,13 +8,6 @@ import { scaleOrdinal } from 'd3-scale';
 import Piechart from './Piechart';
 import PiechartLegend from './PiechartLegend';
 
-/**
- * We are forced to import 'd3-transition' even if not in used. Otherwise 'd3-svg-legend' triggers
- * a Cell.exit().transition not a function encountered
- */
-// eslint-disable-next-line
-import { transition } from 'd3-transition'
-
 class Pools extends Component {
   render() {
     const { data, width, height } = this.props;
