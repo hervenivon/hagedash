@@ -14,6 +14,7 @@ class WebSocketHandler(websocket.WebSocketHandler):
         super().__init__(application, request, **kwargs)
         self._pools_io_working_count = 1
         self._pools_gpu_working_count = 1
+        self._pools_0120_working_count = 1
 
     def _getDataPoint(self):
         # create a new data point
@@ -29,10 +30,29 @@ class WebSocketHandler(websocket.WebSocketHandler):
                     "worker_count": random.randrange(1, 10),
                     "working_count": self._pools_gpu_working_count,
                     "type": "thread"
+                },
+                "0120": {
+                    "worker_count": random.randrange(1, 10),
+                    "working_count": self._pools_0120_working_count,
+                    "type": "thread"
                 }
             },
             "rasters": {
                 "ortho16": {
+                    "io_pool_id": "io",
+                    "computation_pool_id": "io",
+                    "merge_pool_id": "io",
+                    "resampling_pool_id": "io",
+                    "cached": False,
+                    "fp": "Footprint(...)",
+                    "fp_virtual": "Footprint(...)",
+                    "dtype": "uint8",
+                    "nodata": None,
+                    "nbands": 3,
+                    "proj4_stored": "proj4 stored",
+                    "proj4_virtual": "virtual proj4"
+                },
+                "dsm16": {
                     "io_pool_id": "io",
                     "computation_pool_id": "io",
                     "merge_pool_id": "0120",
@@ -42,7 +62,7 @@ class WebSocketHandler(websocket.WebSocketHandler):
                     "fp_virtual": "Footprint(...)",
                     "dtype": "uint8",
                     "nodata": None,
-                    "nbands": 3,
+                    "nbands": 1,
                     "proj4_stored": "proj4 stored",
                     "proj4_virtual": "virtual proj4"
                 },
@@ -70,7 +90,7 @@ class WebSocketHandler(websocket.WebSocketHandler):
                 ],
                 [
                     "hm",
-                    "null"
+                    None
                 ]
             ],
             "queries": {
@@ -126,7 +146,8 @@ class WebSocketHandler(websocket.WebSocketHandler):
         }
 
         self._pools_io_working_count = random.randrange(0, 10)
-        self._pools_gpu_working_count = random.randrange(0, 10)
+        self._pools_gpu_working_count = random.randrange(0, 5)
+        self._pools_0120_working_count = random.randrange(0, 15)
 
         return point_data
 

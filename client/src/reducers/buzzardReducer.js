@@ -19,6 +19,8 @@ import {
   D3_SETZOOMINFO,
 } from '../actions/d3ActionsTypes';
 
+import { entriesToSankey } from '../lib/data';
+
 const initialState = {
   connected: false,
   history: 5, // minutes
@@ -82,6 +84,7 @@ export default (state = initialState, action = {}) => {
         nbrRasters: Object.keys(tmpEntry.rasters).length,
         queries: tmpEntry.queries,
         nbrQueries: Object.keys(tmpEntry.queries).length,
+        connections: tmpEntry.connections,
       };
       state.data.push(newEntry);
 
@@ -104,7 +107,10 @@ export default (state = initialState, action = {}) => {
       state.filteredData = state.data.filter(e => filterData(e, state.brushExtent));
       [state.minFilteredDate, state.maxFilteredDate] = extent(state.filteredData, d => d.date);
 
-      return Object.assign({}, state);
+      return Object.assign({}, state, {
+        // compute sankey ready data
+        ...entriesToSankey(state.filteredData),
+      });
     }
 
 
@@ -182,6 +188,8 @@ export default (state = initialState, action = {}) => {
 
           return Object.assign({}, state, {
             brushExtent: newBrushExtent,
+            // compute sankey ready data
+            ...entriesToSankey(state.filteredData),
           });
         }
         return state;
