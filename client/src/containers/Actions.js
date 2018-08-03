@@ -12,6 +12,8 @@ import {
   clearHistoryAction,
   pauseClearingHistory,
   resumeClearingHistory,
+  lastOne,
+  accumulation,
 } from '../actions/websocketActions';
 
 const mapStateToProps = state => ({
@@ -24,6 +26,8 @@ const mapDispatchToProps = dispatch => ({
   clearHistoryActionProp: () => dispatch(clearHistoryAction()),
   pauseClearingHistoryProp: () => dispatch(pauseClearingHistory()),
   resumeClearingHistoryProp: () => dispatch(resumeClearingHistory()),
+  lastOneProp: () => dispatch(lastOne()),
+  accumulationProp: () => dispatch(accumulation()),
 });
 
 const Actions = ({
@@ -32,6 +36,8 @@ const Actions = ({
   pauseClearingHistoryProp,
   resumeClearingHistoryProp,
   clearHistoryActionProp,
+  lastOneProp,
+  accumulationProp,
 }) => (
   <div className="row align-items-center actions">
     <div className="col-12 text-center">
@@ -40,6 +46,8 @@ const Actions = ({
         <Button onClick={disconnectActionProp} color="secondary" size="sm">Disconnect</Button>
         <Button onClick={pauseClearingHistoryProp} color="secondary" size="sm">Pause history cleaning</Button>
         <Button onClick={resumeClearingHistoryProp} color="secondary" size="sm">Resume history cleaning</Button>
+        <Button onClick={accumulationProp} color="success" size="sm">Accumulation mode</Button>
+        <Button onClick={lastOneProp} color="warning" size="sm">Last one mode</Button>
         <Button onClick={clearHistoryActionProp} color="warning" size="sm">Clear history</Button>
       </ButtonGroup>
     </div>
@@ -54,6 +62,8 @@ Actions.propTypes = {
   pauseClearingHistoryProp: PropTypes.func.isRequired,
   resumeClearingHistoryProp: PropTypes.func.isRequired,
   clearHistoryActionProp: PropTypes.func.isRequired,
+  lastOneProp: PropTypes.func.isRequired,
+  accumulationProp: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Actions);

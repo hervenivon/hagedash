@@ -10,6 +10,8 @@ import {
   WEBSOCKET_RESUMECLEARINGHISTORY,
   WEBSOCKET_PAUSECLEARINGHISTORY,
   WEBSOCKET_CLEARHISTORY,
+  WEBSOCKET_LASTONE,
+  WEBSOCKET_ACCUMULATION,
 } from '../actions/websocketActionsTypes';
 
 import {
@@ -20,6 +22,7 @@ import {
 const initialState = {
   connected: false,
   history: 5, // minutes
+  accumulation: true,
   records: 0,
   data: [],
   filteredData: [],
@@ -82,6 +85,10 @@ export default (state = initialState, action = {}) => {
       };
       state.data.push(newEntry);
 
+      if (!state.accumulation) {
+        state.data = state.data.slice(-1);
+      }
+
       // delete rows collected more than _history hour(s) ago
       const earliest = state.history * 60 * 1000;
       const now = new Date().getTime();
@@ -108,6 +115,12 @@ export default (state = initialState, action = {}) => {
     case WEBSOCKET_CLEARHISTORY: {
       return Object.assign({}, state, {
         data: [],
+        filteredData: [],
+        brushExtent: [null, null],
+        minDate: null,
+        maxDate: null,
+        minFilteredDate: null,
+        maxFilteredDate: null,
       });
     }
 
@@ -135,6 +148,17 @@ export default (state = initialState, action = {}) => {
       });
     }
 
+    case WEBSOCKET_LASTONE: {
+      return Object.assign({}, state, {
+        accumulation: false,
+      });
+    }
+
+    case WEBSOCKET_ACCUMULATION: {
+      return Object.assign({}, state, {
+        accumulation: true,
+      });
+    }
 
     // *********************************************************************************************
     //                          Websocket middleware actions (`src/lib/websocket`)

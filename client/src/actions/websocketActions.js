@@ -4,6 +4,8 @@ import {
   WEBSOCKET_RESUMECLEARINGHISTORY,
   WEBSOCKET_PAUSECLEARINGHISTORY,
   WEBSOCKET_CLEARHISTORY,
+  WEBSOCKET_LASTONE,
+  WEBSOCKET_ACCUMULATION,
 } from './websocketActionsTypes';
 
 export const connectAction = () => (dispatch) => {
@@ -41,6 +43,20 @@ export const pauseClearingHistory = () => (dispatch) => {
 export const resumeClearingHistory = () => (dispatch) => {
   dispatch({
     type: WEBSOCKET_RESUMECLEARINGHISTORY,
+    payload: {},
+  });
+};
+
+export const lastOne = () => (dispatch) => {
+  dispatch({
+    type: WEBSOCKET_LASTONE,
+    payload: {},
+  });
+};
+
+export const accumulation = () => (dispatch) => {
+  dispatch({
+    type: WEBSOCKET_ACCUMULATION,
     payload: {},
   });
 };
