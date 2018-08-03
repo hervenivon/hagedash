@@ -131,7 +131,11 @@ $> ./hagedash_mock.py
 20. [ ] Moves as much as possible data preparation from `src/containers/Pools.js` to redux in `src/reducers/buzzardReducer.js`
 21. [ ] When filtered data is empty display a message instead of nothing
 22. [ ] Replace d3-svg-legend by native d3
+- It has a bug with react, adding unwanted values to the range resulting in color dillution
+- It doesn't work with long names
 23. [ ] When the brush selector is activated, highlight the underlying bars
+24. [ ] Implement array of queries and rasters
+25. [ ] Replace `<div>` by `react-strap` bindings when possible
 99. [ ] Fixing bugs
 - [X] When we disconnect, and we clear history, the Pools remain fixed on the last values
 - [ ] Resizing donut charts doesn't work when screens are really small (because of `src/containers/Piechart.js (l. 39)`)
@@ -144,23 +148,27 @@ $> ./hagedash_mock.py
 d3.js:
 - https://github.com/d3/d3/wiki/gallery
 - [Interactive drop down](http://bl.ocks.org/jonahwilliams/2f16643b999ada7b1909)
-- [brush snapping](https://bl.ocks.org/mbostock/6232537)
-- [brush and zoom](https://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172)
-- [scatterplot brush](https://rajvansia.com/scatterplotbrush-d3-v4.html)
-- additional brushing:
+- Brush:
+  - [brush snapping](https://bl.ocks.org/mbostock/6232537)
+  - [brush and zoom](https://bl.ocks.org/mbostock/34f08d5e11952a80609169b7917d4172)
+  - [scatterplot brush](https://rajvansia.com/scatterplotbrush-d3-v4.html)
   - https://www.visualcinnamon.com/2016/07/brush-bar-chart-d3.html
   - http://bl.ocks.org/nbremer/326fb6de768e85261bfd47aa1f497863
-- [D3 Donut Chart @Observable](https://beta.observablehq.com/@mbostock/d3-donut-chart)
-- [reusable donut chart](https://bl.ocks.org/mbhall88/b2504f8f3e384de4ff2b9dfa60f325e2)
-- [Pie Chart Update, V](https://bl.ocks.org/mbostock/5682158)
-- [Pie Chart](https://bl.ocks.org/mbostock/3887235)
-- Interactive sankey (no dcjs but d3v3):
-  - https://bl.ocks.org/wvengen/2a71af9df0a0655a470d
-  - https://github.com/q-m/d3.chart.sankey
-- [official d3js v4 sankey](https://github.com/d3/d3-sankey)
-- [Sankey MBostock](https://beta.observablehq.com/@mbostock/d3-sankey-diagram)
+- Pie charts:
+  - [D3 Donut Chart @Observable](https://beta.observablehq.com/@mbostock/d3-donut-chart)
+  - [reusable donut chart](https://bl.ocks.org/mbhall88/b2504f8f3e384de4ff2b9dfa60f325e2)
+  - [Pie Chart Update, V](https://bl.ocks.org/mbostock/5682158)
+  - [Pie Chart](https://bl.ocks.org/mbostock/3887235)
+- Sankey
+  - Interactive sankey (no dcjs but d3v3):
+    - https://bl.ocks.org/wvengen/2a71af9df0a0655a470d
+    - https://github.com/q-m/d3.chart.sankey
+  - [official d3js v4 sankey](https://github.com/d3/d3-sankey)
+  - [Sankey MBostock](https://beta.observablehq.com/@mbostock/d3-sankey-diagram)
+  - [2018 San Francisco Major Ranked Choice Voting](https://beta.observablehq.com/@eliaslevy/2018-san-francisco-major-ranked-choice-voting)
 - [Toward reusable charts](https://bost.ocks.org/mike/chart/)
-- [d3-legend](http://d3-legend.susielu.com/)
+- Various:
+  - [d3-legend](http://d3-legend.susielu.com/)
 
 react & d3:
 - D3.js in action chapter 9: https://github.com/emeeks/d3_in_action_2/tree/master/chapter9
