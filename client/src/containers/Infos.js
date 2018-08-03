@@ -4,15 +4,20 @@ import {
   Card, CardBody, CardHeader, CardText, CardDeck,
 } from 'reactstrap';
 import moment from 'moment';
-import { extent } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
 import array from 'lodash/array';
 
-const Infos = ({ filteredData, allData, zoomInfo }) => {
+const Infos = ({
+  filteredData,
+  allData,
+  zoomInfo,
+  dateRange,
+  filteredDateRange,
+}) => {
   const { length: allLength } = allData;
   const { length: filteredLength } = filteredData;
-  const [minDate, maxDate] = extent(allData, d => d.date);
-  const [minFilteredDate, maxFilteredDate] = extent(filteredData, d => d.date);
+  const [minDate, maxDate] = dateRange;
+  const [minFilteredDate, maxFilteredDate] = filteredDateRange;
   const formatDate = timeFormat('%H:%M:%S');
 
   let durationMin = 0;
@@ -67,11 +72,15 @@ const Infos = ({ filteredData, allData, zoomInfo }) => {
 
 Infos.defaultProps = {
   zoomInfo: '',
+  dateRange: [null, null],
+  filteredDateRange: [null, null],
 };
 
 Infos.propTypes = {
   allData: PropTypes.arrayOf(PropTypes.object).isRequired,
   filteredData: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dateRange: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
+  filteredDateRange: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
   zoomInfo: PropTypes.string,
 };
 

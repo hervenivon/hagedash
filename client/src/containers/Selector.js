@@ -8,9 +8,10 @@ import { interpolateDate } from 'd3-interpolate';
 import {
   scaleBand, scaleLinear, scaleOrdinal, scaleQuantize,
 } from 'd3-scale';
+// Unfortunately the import of d3.event along with the react building process doesn't work.
+// The custom detection of the brush extent will have to be updated. (cf. brushed function)
 import { select /* , event as currentEvent */ } from 'd3-selection';
 import { timeFormat } from 'd3-time-format';
-import './App.css';
 
 function getArrayOfDates(start, end) {
   if (start === end) {
@@ -18,7 +19,7 @@ function getArrayOfDates(start, end) {
   }
 
   const res = [];
-  const tmp = new Date(start); // prevent infinite loop if start == end (as object)
+  const tmp = new Date(start);
 
   while (tmp <= end) {
     res.push(new Date(tmp));
@@ -157,12 +158,12 @@ class Selector extends Component {
       // // The normal d3 schema is not working, the currentEvent appears being empty all the time
       //
       // if (!currentEvent.sourceEvent) return; // Only transition after input.
-      // // eslint-disable-next-line
+      //
       // if (!currentEvent.selection) { // Clear empty selection.
       //   changeBrush([null, null]);
       //   return;
       // }
-      // // eslint-disable-next-line
+      //
       // const selectedExtent = currentEvent.selection.map(d => xScale0.invert(d));
       // we replace it with a trick accessing at the internal __brush variable.
 

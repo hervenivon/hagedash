@@ -1,3 +1,5 @@
+import { extent } from 'd3-array';
+
 import {
   WEBSOCKET_OPEN,
   WEBSOCKET_CLOSED,
@@ -20,9 +22,30 @@ const initialState = {
   history: 5, // minutes
   records: 0,
   data: [],
+  filteredData: [],
   brushExtent: [null, null],
   info: null,
+  minDate: null,
+  maxDate: null,
+  minFilteredDate: null,
+  maxFilteredDate: null,
 };
+
+/**
+ * Data filtering
+ * any processing handled by the middleware @ src/reducers/websocketReducer.js
+ */
+function filterData(elt, currentExtent) {
+  /**
+   * No need to test both values of currentExtent, D3_SETBRUSHEXTENT ensures that both are null
+   * or both have a date
+   */
+  if (currentExtent[0] === null
+    || (elt.date >= currentExtent[0] && elt.date <= currentExtent[1])) {
+    return true;
+  }
+  return false;
+}
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
@@ -62,11 +85,18 @@ export default (state = initialState, action = {}) => {
       // delete rows collected more than _history hour(s) ago
       const earliest = state.history * 60 * 1000;
       const now = new Date().getTime();
-
       state.data = state.data.filter(e => e.date >= (now - earliest));
+
+      // compute all data date extent
+      [state.minDate, state.maxDate] = extent(state.data, d => d.date);
 
       // update the number of records
       state.records = state.data.length;
+
+      // compute filtered data
+      state.filteredData = state.data.filter(e => filterData(e, state.brushExtent));
+      [state.minFilteredDate, state.maxFilteredDate] = extent(state.filteredData, d => d.date);
+
       return Object.assign({}, state);
     }
 
@@ -115,7 +145,17 @@ export default (state = initialState, action = {}) => {
         const newBrushExtent = action.payload.brushExtent;
 
         if (newBrushExtent[0] !== state.brushExtent[0]
-            || newBrushExtent[1] !== state.brushExtent[1]) {
+          || newBrushExtent[1] !== state.brushExtent[1]) { // A change occurred
+          if (newBrushExtent[0] === null && newBrushExtent[1] !== null) {
+            newBrushExtent[0] = new Date(newBrushExtent[1]);
+          }
+          if (newBrushExtent[1] === null && newBrushExtent[0] !== null) {
+            newBrushExtent[1] = new Date(newBrushExtent[0]);
+          }
+          // compute filtered data
+          state.filteredData = state.data.filter(e => filterData(e, newBrushExtent));
+          [state.minFilteredDate, state.maxFilteredDate] = extent(state.filteredData, d => d.date);
+
           return Object.assign({}, state, {
             brushExtent: newBrushExtent,
           });

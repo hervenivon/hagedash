@@ -12,11 +12,11 @@ export const setZoomInfo = info => (dispatch) => {
   });
 };
 
-export const setBrushExtent = (x0 = null, x1 = null) => (dispatch) => {
+export const setBrushExtent = (x = [null, null]) => (dispatch) => {
   dispatch({
     type: D3_SETBRUSHEXTENT,
     payload: {
-      brushExtent: [x0, x1],
+      brushExtent: x,
     },
   });
 };
