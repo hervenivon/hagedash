@@ -27,6 +27,8 @@ Which is mostly equivalent to `python3 -m http.server`
 
 You must have `npm` installed to develop and build the `hagedash` dashboard.
 
+You can also install the [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en). This will help you understand which are the dispatched action and interactions with the store in addition with the ability to replay events.
+
 ### Starting the dashboard for development purpose
 
 The `hagedash` dashboard is a react application located in the `client` folder of this repository.
@@ -65,6 +67,26 @@ Because of https://github.com/facebook/create-react-app/pull/3850 still open as 
 }
 ```
 
+We are using the [airbnd linting settings](https://www.npmjs.com/package/eslint-config-airbnb) as it helps producing way better results.
+Unfortunately, as of 2018-08, you are encountering the following message when you `npm install` because linting setting of `CRA` and `Airbnb` are not [compatible](https://github.com/facebook/create-react-app/issues/3540):
+```
+$> npm WARN eslint-config-react-app@2.1.0 requires a peer of eslint-plugin-jsx-a11y@^5.1.1 but none is installed. You must install peer dependencies yourself.
+```
+
+Normally this would lead to warnings when you execute `npm rum lint`. Thanks to the custom following `.eslintrc` configuration, this is avoided:
+```
+{
+  "extends": [
+    "react-app",
+    "airbnb"
+  ],
+  "rules": {
+    "react-app/jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/href-no-hash": "off"
+  }
+}
+```
+
 ## Build
 
 ```
@@ -85,37 +107,38 @@ $> ./hagedash_mock.py
 ### Development todo
 1. [X] Set the development pipeline (https://reactjs.org/docs/create-a-new-react-app.html)
 2. [X] Build the data management through websockets
-3. [ ] Build the bar charts
+3. [X] Build the bar charts
 4. [X] Build the donut chart
 5. [X] Build the timeline chart
 6. [X] Build the brush over timeline for selection
-7. [ ] Build the interactive sankey
+7. [ ] Build the sankey diagram
 8. [ ] Set the building process for distribution along with `buzzard`
 9. [X] Make the distribution trough `./hagedash.py`
-10. [ ] Dispatch the "Connect" action automatically on page load
+10. [ ] ~~Dispatch the "Connect" action automatically on page load~~
 11. [X] Stop automatic re-connection on manual disconnect
-12. [ ] Change logo and header
-13. [ ] Add bootstrap to make things nicer
+12. [X] Change logo and header
+13. [X] Add bootstrap to make things nicer
 14. [ ] Data validation in the websocket handler
-15. [ ] Optimized computed properties (in order to avoid their computation within all components)
+15. [X] Optimized computed properties (in order to avoid their computation within all components)
 16. [ ] Add tests 😇
 17. [ ] Update `App.js` `brushExtent` when data update
 - A working implementation is done in `src/containers/Selector.js (l. 75)` but it stops the React event loop
 - Use Redux instead, move the filtering action and brushextent to the redux in `src/reducers/buzzardReducer.js`
-18. [ ] Add number of even as bar on the selector
-19. [ ] Update performance:
+18. [X] Add number of event as bar on the selector
+19. [X] Update performance:
 - with `shouldComponentUpdate` http://buildwithreact.com/article/optimizing-with-shouldcomponentupdate or `componentWillReceiveProps`
 - https://medium.com/@tibotiber/react-d3-js-balancing-performance-developer-experience-4da35f912484
 20. [ ] Moves as much as possible data preparation from `src/containers/Pools.js` to redux in `src/reducers/buzzardReducer.js`
 21. [ ] When filtered data is empty display a message instead of nothing
 22. [ ] Replace d3-svg-legend by native d3
+23. [ ] When the brush selector is activated, highlight the underlying bars
 99. [ ] Fixing bugs
 - [X] When we disconnect, and we clear history, the Pools remain fixed on the last values
 - [ ] Resizing donut charts doesn't work when screens are really small (because of `src/containers/Piechart.js (l. 39)`)
 - [ ] In `src/containers/Selector.js` the d3.event cannot be accessed. Therefore a trick fix has been implemented in `function brushed()` accessing a private object
 - [ ] When "Clear History" action is dispatch, the extent remains with the old value, this will be solved moving everything to redux
 
-### External resources
+### Lectures
 
 d3.js:
 - https://github.com/d3/d3/wiki/gallery
