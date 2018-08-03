@@ -60,7 +60,7 @@ const Infos = ({
             <CardHeader>Zoom information</CardHeader>
             <CardBody>
               <CardText>
-                <p>{zoomInfo}</p>
+                {zoomInfo}
               </CardText>
             </CardBody>
           </Card>
