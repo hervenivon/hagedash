@@ -85,7 +85,7 @@ export default (state = initialState, action = {}) => {
       };
       state.data.push(newEntry);
 
-      if (!state.accumulation) {
+      if (!state.accumulation) { // we want the last element only
         state.data = state.data.slice(-1);
       }
 
