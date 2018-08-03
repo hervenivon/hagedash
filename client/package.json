@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@types/colorbrewer": "^1.0.29",
+    "@types/prop-types": "^15.5.4",
+    "@types/react-redux": "^6.0.6",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
