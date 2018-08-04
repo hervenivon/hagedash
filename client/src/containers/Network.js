@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import colorbrewer from 'colorbrewer';
+import {
+  Row,
+  Col,
+} from 'reactstrap';
 
+import colorbrewer from 'colorbrewer';
 import { sankey as d3Sankey, sankeyLinkHorizontal } from 'd3-sankey';
 import { select as d3Select } from 'd3-selection';
 import { scaleOrdinal as d3ScaleOrdinal } from 'd3-scale';
@@ -230,16 +234,16 @@ class Network extends Component {
     } = this.props;
 
     return (
-      <div className="row align-items-center no-gutters networkContainer">
-        <div className="col-12">
+      <Row className="row align-items-center no-gutters networkContainer">
+        <Col>
           <svg
             ref={(node) => { this.node = node; }}
             style={{ width: '100%', height: 'auto' }}
             width={width}
             height={height}
           />
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
   }
 }

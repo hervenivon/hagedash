@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import {
   Button,
   ButtonGroup,
+  Row,
+  Col,
 } from 'reactstrap';
 
 import {
@@ -39,8 +41,8 @@ const Actions = ({
   lastOneProp,
   accumulationProp,
 }) => (
-  <div className="row align-items-center actions">
-    <div className="col-12 text-center">
+  <Row className="row align-items-center actionsContainer">
+    <Col className="col-12 text-center">
       <ButtonGroup>
         <Button onClick={connectActionProp} color="primary" size="sm">Connect</Button>
         <Button onClick={disconnectActionProp} color="secondary" size="sm">Disconnect</Button>
@@ -50,8 +52,8 @@ const Actions = ({
         <Button onClick={lastOneProp} color="warning" size="sm">Last one mode</Button>
         <Button onClick={clearHistoryActionProp} color="warning" size="sm">Clear history</Button>
       </ButtonGroup>
-    </div>
-  </div>
+    </Col>
+  </Row>
 );
 
 Actions.defaultProps = {};

@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Alert, Container } from 'reactstrap';
+import {
+  Alert,
+  Container,
+  Row,
+  Col,
+} from 'reactstrap';
 
 import {
   setZoomInfo,
@@ -73,7 +78,6 @@ class App extends Component {
     if (data.length > 0) {
       body = (
         <div>
-          <br />
           <Infos
             allData={data}
             filteredData={filteredData}
@@ -81,7 +85,6 @@ class App extends Component {
             dateRange={[minDate, maxDate]}
             filteredDateRange={[minFilteredDate, maxFilteredDate]}
           />
-          <br />
           <Selector
             dateRange={[minDate, maxDate]}
             data={data}
@@ -90,13 +93,11 @@ class App extends Component {
             changeBrush={setBrushExtentProp}
             onHover={setZoomInfoProp}
           />
-          <br />
           <Pools
             data={filteredData}
             width={availableWidth}
-            height={screenWidth / 4}
+            height={screenWidth / 5}
           />
-          <br />
           <Network
             data={{ nodes, links }}
             width={availableWidth}
@@ -107,28 +108,26 @@ class App extends Component {
       );
     } else {
       body = (
-        <div>
-          <br />
-          <Alert color="info">
-            {'No data received yet. Have you tried to click "Connect"?'}
-          </Alert>
-        </div>
+        <Row className="row align-items-center alertContainer">
+          <Col className="col-12 text-center">
+            <Alert color="info">
+              {'No data received yet. Have you tried to click "Connect"?'}
+            </Alert>
+          </Col>
+        </Row>
       );
     }
 
     return (
       <div>
-        <div className="row" style={{ display: 'none' }}>
-          <div className="col-12">
-            <pre>{ JSON.stringify(this.props) }</pre>
-            <pre>{ JSON.stringify(this.state) }</pre>
-            <pre>{ JSON.stringify([minDate, maxDate]) }</pre>
-            <pre>{ JSON.stringify([minFilteredDate, maxFilteredDate]) }</pre>
-          </div>
-        </div>
+        <span style={{ display: 'none' }}>
+          <pre>{ JSON.stringify(this.props) }</pre>
+          <pre>{ JSON.stringify(this.state) }</pre>
+          <pre>{ JSON.stringify([minDate, maxDate]) }</pre>
+          <pre>{ JSON.stringify([minFilteredDate, maxFilteredDate]) }</pre>
+        </span>
         <NavBar />
         <Container fluid>
-          <br />
           <Actions />
           {body}
         </Container>

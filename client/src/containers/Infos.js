@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Card, CardBody, CardHeader, CardText, CardDeck,
+  Card,
+  CardBody,
+  CardHeader,
+  CardText,
+  CardDeck,
+  Row,
+  Col,
 } from 'reactstrap';
 import moment from 'moment';
 import { timeFormat } from 'd3-time-format';
@@ -35,8 +41,8 @@ const Infos = ({
   );
 
   return (
-    <div className="row statsContainer">
-      <div className="col-12">
+    <Row className="row align-items-center no-gutters statsContainer">
+      <Col>
         <CardDeck>
           <Card>
             <CardHeader>General information</CardHeader>
@@ -65,8 +71,8 @@ const Infos = ({
             </CardBody>
           </Card>
         </CardDeck>
-      </div>
-    </div>
+      </Col>
+    </Row>
   );
 };
 

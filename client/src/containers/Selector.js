@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {
+  Row,
+  Col,
+} from 'reactstrap';
+
 import colorbrewer from 'colorbrewer';
 import { axisBottom } from 'd3-axis';
 import { max } from 'd3-array';
@@ -296,11 +301,11 @@ class Selector extends Component {
       },
     } = this;
     return (
-      <div className="row align-items-center no-gutters selectorContainer">
-        <div className="col-12">
+      <Row className="row align-items-center no-gutters selectorContainer">
+        <Col>
           <svg ref={(node) => { this.node = node; }} width={width} height={height} />
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
   }
 }

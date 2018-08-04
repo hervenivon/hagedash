@@ -13,11 +13,13 @@ import { transition } from 'd3-transition'
 class PiechartLegend extends Component {
   static paintLegend(node, labels, colorScale) {
     const legend = legendColor()
-      .scale(colorScale)
+      .shapeWidth(25)
+      .shapePadding(10)
       .orient('horizontal')
       .labelAlign('start')
-      .labelWrap(40)
-      .labels(labels);
+      .labelWrap(30)
+      .labels(labels)
+      .scale(colorScale);
 
     select(node)
       .selectAll('g.legend')

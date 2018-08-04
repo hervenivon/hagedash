@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {
+  Row,
+  Col,
+} from 'reactstrap';
+
 import colorbrewer from 'colorbrewer';
 import { mean } from 'd3-array';
 import { nest, set } from 'd3-collection';
@@ -54,21 +59,21 @@ class Pools extends Component {
       .range(colorbrewer.Blues[6]);
 
     const pieWidth = width / 4;
-    const pieHeight = Math.min(pieWidth, height, 150);
+    const pieHeight = Math.min(pieWidth, height, 120);
 
     const legendWidth = width / 2;
     const legendHeight = 50;
 
     return (
       <div className="poolsContainer">
-        <div className="row align-items-center no-gutters">
-          <div className="col-3 text-center"><p>Average worker count per pool</p></div>
-          <div className="col-3 text-center"><p>Average working count per pool</p></div>
-          <div className="col-3 text-center"><p>Average worker count per pool type</p></div>
-          <div className="col-3 text-center"><p>Average working count per pool type</p></div>
-        </div>
-        <div className="row align-items-center no-gutters">
-          <div className="col-3">
+        <Row className="row align-items-center no-gutters">
+          <Col className="text-center"><p>Average worker count per pool</p></Col>
+          <Col className="text-center"><p>Average working count per pool</p></Col>
+          <Col className="text-center"><p>Average worker count per pool type</p></Col>
+          <Col className="text-center"><p>Average working count per pool type</p></Col>
+        </Row>
+        <Row className="row align-items-center no-gutters">
+          <Col className="text-center">
             <Piechart
               data={nestedPools}
               colorScale={colorScale.copy()}
@@ -77,8 +82,8 @@ class Pools extends Component {
               valueFunc={d => d.avgWorkerCount}
               keyFunc={d => d.key}
             />
-          </div>
-          <div className="col-3">
+          </Col>
+          <Col className="text-center">
             <Piechart
               data={nestedPools}
               colorScale={colorScale.copy()}
@@ -87,8 +92,8 @@ class Pools extends Component {
               valueFunc={d => d.avgWorkingCount}
               keyFunc={d => d.key}
             />
-          </div>
-          <div className="col-3">
+          </Col>
+          <Col className="text-center">
             <Piechart
               data={nestedPoolTypes}
               colorScale={typeColorScale.copy()}
@@ -97,8 +102,8 @@ class Pools extends Component {
               valueFunc={d => d.avgWorkerCount}
               keyFunc={d => d.key}
             />
-          </div>
-          <div className="col-3">
+          </Col>
+          <Col className="text-center">
             <Piechart
               data={nestedPoolTypes}
               colorScale={typeColorScale.copy()}
@@ -107,26 +112,26 @@ class Pools extends Component {
               valueFunc={d => d.avgWorkingCount}
               keyFunc={d => d.key}
             />
-          </div>
-        </div>
-        <div className="row align-items-center">
-          <div className="col-6">
+          </Col>
+        </Row>
+        <Row className="row align-items-center no-gutters">
+          <Col className="text-center">
             <PiechartLegend
               labels={poolsSet.values()}
               colorScale={colorScale.copy()}
               width={legendWidth}
               height={legendHeight}
             />
-          </div>
-          <div className="col-6">
+          </Col>
+          <Col className="text-center">
             <PiechartLegend
               labels={poolTypesSet.values()}
               colorScale={typeColorScale.copy()}
               width={legendWidth}
               height={legendHeight}
             />
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
     );
   }
