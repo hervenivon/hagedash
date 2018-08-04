@@ -115,7 +115,7 @@ class Selector extends Component {
 
     const dayAxisInterpolator = interpolateDate(dateRange[0], dateRange[1]);
     const dayAxis = axisBottom()
-      .tickValues([0.0, 0.25, 0.5, 0.75, 1].map(d => new Date(dayAxisInterpolator(d))))
+      .tickValues([0.05, 0.275, 0.5, 0.775, 0.95].map(d => new Date(dayAxisInterpolator(d))))
       .tickFormat(timeFormat('%H:%M:%S'))
       .scale(xScale0);
 
@@ -125,7 +125,7 @@ class Selector extends Component {
       .enter()
       .append('g')
       .attr('class', 'selectoraxis')
-      .attr('transform', `translate(0,${(height / 3) * 2})`);
+      .attr('transform', `translate(0, ${(height / 3) * 2})`);
 
     select(node)
       .select('g.selectoraxis')
@@ -233,8 +233,13 @@ class Selector extends Component {
       .select('g.barchart')
       .selectAll('g.barchartgroup')
       .data(data)
-      .attr('transform', d => `translate(${xScale0(d.date)},0)`)
-      .on('mouseover', d => onHover(`${d.nbrRasters} rasters for ${d.nbrQueries} queries`))
+      .attr('transform', (d) => {
+        let xTrsl = xScale0(d.date);
+        // in certain cases - lot of data for instances - result of xScale0(d.date) = undefined
+        xTrsl = Number.isNaN(xTrsl) || xTrsl === null || xTrsl === undefined ? 0 : xTrsl;
+        return `translate(${xTrsl}, 0)`;
+      })
+      .on('mouseover', d => onHover(`${d.nbrRasters} rasters; ${d.nbrQueries} queries`))
       .on('mouseout', () => onHover(null));
 
     // Dynamic data generation to fit the grouped bar chart schema
