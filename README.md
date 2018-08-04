@@ -1,19 +1,23 @@
 # hagedash
 
-Realtime dashboard to support [`buzzard`](https://www.github.com/airware/buzzard) next iteration.
+Realtime dashboard to support [`buzzard`](https://www.github.com/airware/buzzard) next iteration monitoring and debug.
 
-Temporary hosted on https://github.com/HerveNivon/hagedash
+Temporary hosted on https://github.com/HerveNivon/hagedash. This repository also hosts a built version of the dashboard (`client/build/`).
 
-# Launching the dashboard server
+<div align="center">
+  <img src="img/demo.gif"><br />
+</div>
 
-## Python 2.7
+## Launching the dashboard server
+
+### Python 2.7
 
 ```
 $> cd client/build
 $> python -m SimpleHTTPServer 3000
 ```
 
-## Python 3.6
+### Python 3.6
 
 ```
 $> ./hagedash.py
@@ -23,17 +27,27 @@ Which is mostly equivalent to `python3 -m http.server`
 
 ## Development
 
-### Pre requisite
+The `hagedash` dashboard is a [react](https://reactjs.org) application located in the `client` folder of this repository.
 
-You must have `npm` installed to develop and build the `hagedash` dashboard.
+### Pre requisites
 
-You can also install the [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en). This will help you understand which are the dispatched action and interactions with the store in addition with the ability to replay events.
+You must have `node` and `npm` installed to develop and build the `hagedash` dashboard.
+
+You should also install the [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en). This will help you understand which are the dispatched actions and interactions with the store in addition with the ability to replay events.
+
+### Starting the Mock websocket server
+
+To launch a websocket server that mocks the `buzzard` expected data entries execute the following.
+
+```
+$> ./hagedash_mock.py
+```
+
+It will create a websocket server on `http://localhost:8001/websocket`.
 
 ### Starting the dashboard for development purpose
 
-The `hagedash` dashboard is a react application located in the `client` folder of this repository.
-
-To start the live reload feature simply:
+To start the dashboard in live reload mode (the page refresh with every change in the source code):
 ```
 $> cd client
 $> npm start
@@ -45,17 +59,17 @@ See [`client/README.md`](client/README.md) for more information.
 
 Debugging the dashboard in the Editor has only been tested in [Visual Studio Code](https://code.visualstudio.com/).
 
-This enables you as a developer to write and debug your React code without leaving the editor, and most importantly it enables you to have a continuous development workflow, where context switching is minimal, as you don’t have to switch between tools.
+This enables you as a developer to write and debug the web application code without leaving the editor.
 
 You would need to have the latest version of [VS Code](https://code.visualstudio.com/) and [VS Code Chrome Debugger Extension](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) installed.
 
-Start your app by running npm start, and start debugging in VS Code by pressing `F5` or by clicking the green debug icon of the debugger panel. You can now write code, set breakpoints, make changes to the code, and debug your newly modified code—all from your editor.
+Start your app by running `npm start`, and start debugging in VS Code by pressing `F5` or by clicking the green debug icon of the debugger panel. You can now write code, set breakpoints, make changes to the code, and debug your newly modified code — all from your editor.
 
 See [Debugging in the Editor](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#debugging-in-the-editor) for additional details regarding other editors.
 
 ### Linting
 
-Because of https://github.com/facebook/create-react-app/pull/3850 still open as of 25th of July, the following is present in `client/package.json`:
+With https://github.com/facebook/create-react-app/pull/3850 still open as of 25th of July, the following is present in `client/package.json` to allow execution of linting from the command line - with `npm run lint` - instead of having to launch the application with `npm start` and wait for lint errors:
 
 ```json
 {
@@ -65,6 +79,11 @@ Because of https://github.com/facebook/create-react-app/pull/3850 still open as 
     "lint": "node node_modules/eslint/bin/eslint.js src/"
   }
 }
+```
+
+This also allow you to automatically fix certain linting errors with:
+```
+$> npm run lint -- --fix
 ```
 
 We are using the [airbnd linting settings](https://www.npmjs.com/package/eslint-config-airbnb) as it helps producing way better results.
@@ -87,63 +106,58 @@ Normally this would lead to warnings when you execute `npm rum lint`. Thanks to 
 }
 ```
 
-## Build
+## Building the dashboard
 
 ```
 $> cd client
-$> npm build
+$> npm run build
 ```
 
-See [`client/README.md`](client/README.md) for more information.
+Commit the last build
 
-### Launch the Mock websocket server
-
-Launch the websocket server. It will create a websocket server on `http://localhost:8001/websocket`.
-
-```
-$> ./hagedash_mock.py
-```
-
-### Development todo
+## Development todo
 1. [X] Set the development pipeline (https://reactjs.org/docs/create-a-new-react-app.html)
 2. [X] Build the data management through websockets
 3. [X] Build the bar charts
 4. [X] Build the donut chart
 5. [X] Build the timeline chart
 6. [X] Build the brush over timeline for selection
-7. [ ] Build the sankey diagram
-8. [ ] Set the building process for distribution along with `buzzard`
+7. [X] Build the sankey diagram
+8. [X] Set the building process for distribution along with `buzzard`
 9. [X] Make the distribution trough `./hagedash.py`
 10. [ ] ~~Dispatch the "Connect" action automatically on page load~~
 11. [X] Stop automatic re-connection on manual disconnect
 12. [X] Change logo and header
 13. [X] Add bootstrap to make things nicer
-14. [ ] Data validation in the websocket handler
+14. [ ] `buzzardReducer.js`: Data validation in the websocket handler
 15. [X] Optimized computed properties (in order to avoid their computation within all components)
 16. [ ] Add tests 😇
-17. [ ] Update `App.js` `brushExtent` when data update
+17. [X] Update `App.js` `brushExtent` when data update
 - A working implementation is done in `src/containers/Selector.js (l. 75)` but it stops the React event loop
 - Use Redux instead, move the filtering action and brushextent to the redux in `src/reducers/buzzardReducer.js`
 18. [X] Add number of event as bar on the selector
-19. [X] Update performance:
+19. [ ] Enhance performances:
 - with `shouldComponentUpdate` http://buildwithreact.com/article/optimizing-with-shouldcomponentupdate or `componentWillReceiveProps`
 - https://medium.com/@tibotiber/react-d3-js-balancing-performance-developer-experience-4da35f912484
 20. [ ] Moves as much as possible data preparation from `src/containers/Pools.js` to redux in `src/reducers/buzzardReducer.js`
 21. [ ] When filtered data is empty display a message instead of nothing
 22. [ ] Replace d3-svg-legend by native d3
-- It has a bug with react, adding unwanted values to the range resulting in color dillution
+- It has a bug with react, adding unwanted values to the range resulting in color dilution
 - It doesn't work with long names
-23. [ ] When the brush selector is activated, highlight the underlying bars
-24. [ ] Implement array of queries and rasters
-25. [ ] Replace `<div>` by `react-strap` bindings when possible
-99. [ ] Fixing bugs
+23. [ ] `src/containers/Selector.js`: When the brush selector is activated, highlight the underlying bars
+24. [X] Implement array of queries and rasters
+25. [ ] Replace `<div>` with [`react-strap`](https://reactstrap.github.io/) bindings when possible. `react-strap` is already setup
+26. [ ] `src/containers/Network.js`: highlight querries on `mouseover` event (greyout or set opacity of other `paths` to 0.5 for instance)
+99. [ ] Bug Fixing:
 - [X] When we disconnect, and we clear history, the Pools remain fixed on the last values
-- [ ] Resizing donut charts doesn't work when screens are really small (because of `src/containers/Piechart.js (l. 39)`)
-- [ ] In `src/containers/Selector.js` the d3.event cannot be accessed. Therefore a trick fix has been implemented in `function brushed()` accessing a private object
-- [ ] When "Clear History" action is dispatch, the extent remains with the old value, this will be solved moving everything to redux
-- [ ] When the data accumulated of a periode of 5 minutes, the scale bar of the selector is not updated
+- [ ] `src/containers/Pools.js`: Resizing donut charts doesn't work when screens are really small (because of `src/containers/Piechart.js (l. 39)`)
+- [ ] `src/containers/Selector.js`: the d3.event cannot be accessed. Therefore a tricky fix has been implemented in `function brushed()` accessing a private object
+- [X] When "Clear History" action is dispatch, the extent remains with the old value, this will be solved moving everything to redux
+- [X] `src/containers/Network.js`:When the data accumulated of a periode of 5 minutes, the scale bar of the selector is not updated
+- [ ] `src/containers/Network.js`: Event `mouseout` is not working. For others cases, [Chrome Devtools](https://developers.google.com/web/tools/chrome-devtools/console/events) have proven themselves helpful
+- [ ] `src/containers/Network.js`: the size of nodes is based on the value of the links attached to. As the value of links is the pixel size, and the pixel size is not coherent it may lead to unwanted display behavior
 
-### Lectures
+## Lectures
 
 d3.js:
 - https://github.com/d3/d3/wiki/gallery
