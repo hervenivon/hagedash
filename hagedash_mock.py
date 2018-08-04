@@ -95,6 +95,7 @@ class WebSocketHandler(websocket.WebSocketHandler):
             ],
             "queries": {
                 "0x25648": {
+                    "root_query_id": "0x8asd31",
                     "connection": [
                         "ortho16",
                         "hm"
@@ -111,6 +112,7 @@ class WebSocketHandler(websocket.WebSocketHandler):
                     "sent_area": 15
                 },
                 "0x87431": {
+                    "root_query_id": "0x8asd31",
                     "connection": [
                         "dsm16",
                         "hm"
@@ -127,6 +129,7 @@ class WebSocketHandler(websocket.WebSocketHandler):
                     "sent_area": 0
                 },
                 "0x8asd31": {
+                    "root_query_id": "0x8asd31",
                     "connection": [
                         "hm",
                         None
