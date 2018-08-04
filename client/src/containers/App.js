@@ -15,6 +15,7 @@ import NavBar from './NavBar';
 import Infos from './Infos';
 import Pools from './Pools';
 import Selector from './Selector';
+import Network from './Network';
 
 const mapStateToProps = state => ({
   ...state,
@@ -54,6 +55,8 @@ class App extends Component {
           maxDate,
           minFilteredDate,
           maxFilteredDate,
+          nodes,
+          links,
         },
         setZoomInfoProp,
         // eslint-disable-next-line
@@ -93,6 +96,13 @@ class App extends Component {
             width={availableWidth}
             height={screenWidth / 4}
           />
+          <br />
+          <Network
+            data={{ nodes, links }}
+            width={availableWidth}
+            height={Math.max(Math.ceil((nodes.length / links.length) * 150), 250)}
+            onHover={setZoomInfoProp}
+          />
         </div>
       );
     } else {
@@ -100,7 +110,7 @@ class App extends Component {
         <div>
           <br />
           <Alert color="info">
-            {'Waiting for data - click "Connect"'}
+            {'No data received yet. Have you tried to click "Connect"?'}
           </Alert>
         </div>
       );
@@ -117,10 +127,9 @@ class App extends Component {
           </div>
         </div>
         <NavBar />
-        <br />
-        <Actions />
         <Container fluid>
-          {/* {header} */}
+          <br />
+          <Actions />
           {body}
         </Container>
       </div>

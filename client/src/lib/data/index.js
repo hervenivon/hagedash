@@ -37,6 +37,8 @@ const entriesToSankey = (entries, valueFunc = e => e.total_pixels) => {
 
     Object.keys(e.queries).forEach((key) => { // go through all queries of the entry
       const meta = {
+        query: key,
+        root_query_id: e.queries[key].root_query_id,
         total_arrays: e.queries[key].total_arrays,
         sent_arrays: e.queries[key].sent_arrays,
         max_waiting: e.queries[key].max_waiting,
