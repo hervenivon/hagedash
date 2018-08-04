@@ -81,7 +81,11 @@ Infos.propTypes = {
   filteredData: PropTypes.arrayOf(PropTypes.object).isRequired,
   dateRange: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
   filteredDateRange: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
-  zoomInfo: PropTypes.string,
+  zoomInfo: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element,
+    PropTypes.instanceOf(Object),
+  ]),
 };
 
 export default Infos;
