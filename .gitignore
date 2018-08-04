@@ -5,28 +5,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-target/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -43,17 +21,6 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Sphinx documentation
-docs/_build/
 
 # Environments
 .env
