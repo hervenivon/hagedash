@@ -173,8 +173,6 @@ Arc.propTypes = {
 };
 
 Piechart.defaultProps = {
-  width: 0,
-  height: 0,
   valueFunc: () => {},
   keyFunc: () => {},
   colorScale: () => {},
@@ -182,8 +180,8 @@ Piechart.defaultProps = {
 
 Piechart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  width: PropTypes.number,
-  height: PropTypes.number,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
   valueFunc: PropTypes.func,
   keyFunc: PropTypes.func,
   colorScale: PropTypes.func,
