@@ -1,0 +1,13 @@
+{
+  "git.ignoreLimitWarning": true,
+  "eslint.enable": true,
+  "files.insertFinalNewline": true,
+  "files.associations": {
+    "**/src/index.js": "javascriptreact",
+    "**/src/containers/*.js": "javascriptreact"
+  },
+  "cSpell.words": [
+    "colorbrewer",
+    "selectoraxis"
+  ]
+}

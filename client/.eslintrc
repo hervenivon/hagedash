@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "react-app",
+    "airbnb"
+  ],
+  "rules": {
+    "react-app/jsx-a11y/href-no-hash": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "jsx-a11y/href-no-hash": "off",
+    "no-param-reassign": "off"
+  }
+}

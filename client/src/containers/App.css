@@ -1,0 +1,52 @@
+body {
+  font-size: 13px;
+}
+
+rect.overlay {
+  opacity: 0;
+}
+
+rect.selection {
+  fill: rgb(42, 42, 42);
+  opacity: 0.5;
+}
+
+/* handle left */
+rect.handle.handle--w {
+  fill: rgb(42, 42, 42);;
+  opacity: 0.25;
+}
+
+/* handle right */
+rect.handle.handle--e {
+  fill: rgb(42, 42, 42);;
+  opacity: 0.25;
+}
+
+.navbar {
+  padding: 8px;
+}
+
+.actionsContainer {
+  margin-top: 15px;
+}
+
+.alertContainer {
+  margin-top: 13px;
+}
+
+.statsContainer {
+  margin-top: 15px;
+}
+
+.selectorContainer {
+  margin-top: 15px;
+}
+
+.poolsContainer {
+  margin-top: 15px;
+}
+
+.networkContainer {
+  margin-top: 15px;
+}
