@@ -147,7 +147,7 @@ Commit the last build
 23. [ ] `src/containers/Selector.js`: When the brush selector is activated, highlight the underlying bars
 24. [X] Implement array of queries and rasters
 25. [ ] Replace `<div>` with [`react-strap`](https://reactstrap.github.io/) bindings when possible. `react-strap` is already setup
-26. [ ] `src/containers/Network.js`: highlight querries on `mouseover` event (greyout or set opacity of other `paths` to 0.5 for instance)
+26. [ ] `src/containers/Network.js`: highlight querries on `mouseover` event (greyout or set opacity of other `paths` to 0.5 for instance) much like in this [interactive Sankey](https://bl.ocks.org/wvengen/2a71af9df0a0655a470d)
 99. [ ] Bug Fixing:
 - [X] When we disconnect, and we clear history, the Pools remain fixed on the last values
 - [ ] `src/containers/Pools.js`: Resizing donut charts doesn't work when screens are really small (because of `src/containers/Piechart.js (l. 39)`)
